@@ -1,0 +1,8 @@
+@import url('../../global.css');
+
+.markdown {
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+}

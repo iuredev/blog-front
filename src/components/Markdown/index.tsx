@@ -1,0 +1,52 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import ReactMarkdown, { Components } from "react-markdown";
+
+import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import remarkGfm from "remark-gfm";
+import "./style.css";
+interface MarkdownRendererProps {
+  content: string;
+}
+
+export default function Markdown({ content }: MarkdownRendererProps) {
+  type MarkdownPayload = any;
+
+  const renderers: Components = {
+    code: ({ className, children, ...props }: MarkdownPayload) => {
+      const language = className?.replace("language-", "") || "";
+      const code = String(children).replace(/\n$/, "");
+
+      const customStyle: React.CSSProperties = {
+        padding: "10px",
+        borderRadius: "5px",
+        fontFamily: "monospace",
+        fontSize: "14px",
+      };
+
+      return (
+        <SyntaxHighlighter
+          language={language}
+          showLineNumbers
+          customStyle={customStyle}
+          style={dracula}
+          {...props}
+        >
+          {code}
+        </SyntaxHighlighter>
+      );
+    },
+  };
+
+  return (
+    <div className="prose prose-lg dark:prose-invert">
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        components={renderers}
+        className="markdown"
+      >
+        {content}
+      </ReactMarkdown>
+    </div>
+  );
+}
