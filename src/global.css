@@ -4,6 +4,28 @@
 
 @layer base {
   body {
-    @apply dark:bg-gray-800 bg-gray-50
+    @apply dark:bg-gray-900 bg-gray-50
+    text-gray-600 dark:text-gray-300;
   }
+
+  a:hover {
+    @apply text-blue-500;
+  }
+
+}
+
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.profile-image {
+  max-width: 142px;
+  max-height: 142px;
 }
