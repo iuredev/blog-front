@@ -1,15 +1,14 @@
-import React from "react";
 import { Routes, Route } from "react-router";
-import { Home, Blog } from "../pages/index";
+import { Home, Blog, NotFoundPage, About, Post } from "../pages";
 
-const RoutesComponent: React.FC = () => {
+export default function RoutesComponent() {
   return (
     <Routes>
       <Route path="/" Component={Home} />
       <Route path="/blog" Component={Blog} />
-      <Route path="*" element={<div>404</div>} />
+      <Route path="/about" Component={About} />
+      <Route path="/blog/:slug" Component={Post} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
-};
-
-export default RoutesComponent;
+}
