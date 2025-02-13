@@ -1,12 +1,12 @@
-export const formatDate = (date: string) => {
-  return new Date(date).toLocaleDateString("en-US", {
+export const formatDate = ( date: string, locale:  Intl.LocalesArgument = "en-US",) => {
+  return new Date(date).toLocaleDateString(locale, {
     year: "numeric",
-    month: "long",
+    month: "short",
     day: "numeric",
   });
 };
 
-export const getMinutesToRead = (content: string) => {
+export const minutesToRead = (content: string) => {
   const wordsPerMinute = 200;
   const wordCount = content.trim().split(/\s+/).length;
    const minutesToRead = Math.ceil(wordCount / wordsPerMinute);

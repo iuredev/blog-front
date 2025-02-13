@@ -1,81 +1,37 @@
 import { useParams } from "react-router";
 import "tailwindcss/tailwind.css";
 import { Markdown } from "../../components";
-import { getMinutesToRead } from "../../utils";
+import { formatDate, minutesToRead } from "../../utils";
+import { useGetPostBySlug } from "../../api/hooks";
 
 
 export default function Post() {
   const { slug } = useParams<{ slug: string }>();
+
+  const { data  , isLoading } = useGetPostBySlug(slug as string);
+
+
+  console.log(data);
+
+ 
   
-
-  // const helmet = useHelmet("Post", "This is a post");
-    
-  const markdownContent = `
-# My Quantified Self Set-up
-When I published my inaugural  a week ago, I ended up getting a few questions about how I track various metrics. While I suspect this system will evolve over time, I can share what it looks like at the moment.
-
-## 📱 MOBILE
-
-// BLOCKQUOTE EXAMPLE
-> I use an app called [Exist](https://exist.io) to track a variety of data points. Exist has a number of integrations, but I only use a few of them. Here's what I'm tracking:
-
-
-I use an app called [Exist](https://exist.io) to track a variety of data points. Exist has a number of integrations, but I only use a few of them. Here's what I'm tracking:
-
-link to airtable
-
-## 😉 WELLNESS
-
-
-I'm planning on revising this spreadsheet annually, but right now the data spans 8 categories: Sleep, Wellness, Audience, Phone, Desktop, Fitness, Reading, and Location.
-
-> Side note: I enjoy spreadsheet apps more in dark mode and since that functionality isn't available in Airtable yet, I've been using [Dark Reader](https://darkreader.org) as a solution. I like it a lot so far.
-
-## 💤 SLEEP
-
-\`\`\`java 
-public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
-}
-\`\`\`
-
-\`\`\`go
-package main
-
-import "fmt"
-
-func main() {
-    fmt.Println("Hello, World!")
-}
-\`\`\`
-
-\`\`\`rust
-fn main() {
-    println!("Hello, World!");
-}
-\`\`\`
-
-\`\`\`typescript
-function greet(name: string): string {
-    return "Hello!" + "name";
-}
-
-console.log(greet('TypeScript'));
-\`\`\`
-`;
 
   return (
     <div className="container mx-auto">
-      {/* {helmet} */}
-      <div className="mt-12 mb-4">
-        <h1 className="text-4xl font-bold">Name Post {slug}</h1>
-        <p className="mb-4 text-gray-400">date • category • {getMinutesToRead(markdownContent)}</p>
+      {isLoading ? (
+        <div className="animate-spin inline-block w-8 h-8 border-[3px] border-current border-t-transparent text-blue-600 rounded-full" role="status" aria-label="loading">
+          <span className="sr-only">Loading...</span>
+        </div>
+      ) : (<>
+        <div className="mt-12 mb-4">
+        <h1 className="text-4xl font-bold">{data?.title}</h1>
+        <p className="mb-4 text-gray-400">{formatDate("2025-02-05T01:59:57Z")} • {data?.category && `${data.category.name} •`} {minutesToRead('')}</p>
       </div>
       <div className="content">
-        <Markdown content={markdownContent} />
-      </div>
+        <Markdown content={data?.body || ""} />
+      </div></>
+      )}
+      
     </div>
   );
 }
