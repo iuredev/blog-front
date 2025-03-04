@@ -1,57 +1,45 @@
-import { Link } from "react-router";
-// import { useHelmet } from "../../hooks";
+import {  useGetPostsPaginated } from "../../api/hooks";
+import { useState } from "react";
+import { Error, Loading, PostLink } from "../../components";
+import Pagination from "../../components/Pagination";
+import useHelmet from "../../hooks";
 
 export default function Blog() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const {posts = [], pagination, isLoading, isError } = useGetPostsPaginated(10, currentPage);
 
-  const mockData = [
-    {
-      id: 1,
-      title: "My First Post",
-      created_at: "2023-08-01",
-      category: "Technology",
-      content:
-        "This is the content for my first post. It's not very long, but it's a start.",
-    },
-    {
-      id: 2,
-      title: "My Second Post",
-      created_at: "2023-08-02",
-      category: "Lifestyle",
-      content:
-        "This is the content for my second post. It's not very long, but it's a start.",
-    },
-    {
-      id: 3,
-      title: "My Third Post",
-      created_at: "2023-08-03",
-      category: "Travel",
-      content:
-        "This is the content for my third post. It's not very long, but it's a start.",
-    },
-  ];
+  useHelmet("Blog", "Blog - Iure.dev");
 
-  // const helmet = useHelmet("Blog", "This is where I write about things that interest me");
+ const render = () => {
+    if (isLoading) {
+      return <Loading />;
+    }
+
+    if (isError) {
+      return <Error />;
+    }
+
+
+    return (
+      posts.map((post) => (
+          <PostLink key={post.id} post={post} preview={false} />
+          ))
+        )
+
+  }
+  
 
   return (
-    <div className="py-8">
-      {/* {helmet} */}
-      <h1 className="text-4xl font-bold mb-4">Blog</h1>
-      <p>This is where I write about things that interest me</p>
+    <div>
+      <div > 
+        <h1 className="text-4xl font-bold ">Blog</h1>
+        <p className="text-gray-400">This is where I write about things that interest me. Enjoy reading it! 🙂</p>
+      </div>
+     
 
       <div className="mt-8">
-        {mockData.map((post) => (
-          <div key={post.id} className="my-4">
-            <div className="text-xl font-semibold block">
-              <Link to={`/blog/${post.id}`}>{post.title}</Link>
-            </div>
-            <span className="text-gray-400 text-sm">
-              {post.created_at} • {post.category}
-            </span>
-            <p className="line-clamp-2 text-ellipsis text-gray-400">
-              {post.content}
-            </p>
-          </div>
-        ))}
+        {render()}        
+        <Pagination totalPages={pagination?.pageCount || 1} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
       </div>
     </div>
   );
