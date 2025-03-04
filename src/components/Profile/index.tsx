@@ -7,7 +7,7 @@ const Profile = () => {
       <div className="gap-2 md:gap-8 max-w-4xl mx-auto text-center flex flex-col md:flex-row items-center md:items-start">
         <div className="max-h-142 w-52 h-52 md:w-132 md:h-132 profile-image rounded-full border-2 border-gradient border-opacity-50">
           <img
-            src="https://media.licdn.com/dms/image/v2/C4D03AQHEsmljAuaAnA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1616953667172?e=1742428800&v=beta&t=LlT13FLFRg_cm9jhyW4uBQn2XDGecxOzz_x3gY84AEY"
+            src="public/iure.jpg"
             alt="Iure Gomes"
             className=" object-contain object-center rounded-full "
           />
