@@ -1,37 +1,49 @@
+import { Link } from "react-router";
+import { useGetPage } from "../../api/hooks";
+import { Error, Loading, Markdown } from "../../components";
+import useHelmet from "../../hooks";
+
 export default function About() {
+
+   const { data, isLoading, isError} = useGetPage("about");
+
+   useHelmet("About", "About - Iure.dev");
+
+
+   const render = () => {
+     if (isLoading) {
+       return <Loading />;
+     }
+
+     if (isError) {
+       return <Error />
+     }
+
+     if (data) {
+       return (
+         <div className="flex flex-col gap-8">
+           <h1 className="text-4xl font-bold">{data?.title} </h1> 
+           <div className="content grid grid-cols-1">
+             <Markdown content={data.content} />
+           </div>
+         </div>
+       );
+     }
+   }
   return (
-    <div className="container mt-12 ">
-      <h1 className="text-4xl font-bold mb-4 ">Hey, I'm Iure 👋🏼</h1>
-      <div className="content">
-        <p>
-          I'm a software engineer based in São Paulo, Brazil. I specialize in
-          building web applications using React and Next.js, and I'm also
-          passionate about learning new things and staying up-to-date with the
-          latest technologies.
-        </p>
-      </div>
+    <div className="flex flex-col">
 
-      <div className="mt-8 content ">
-        <h2 className="text-2xl font-bold mb-4">Experience</h2>
-        <p>
-          I've been working as a software engineer for over 5 years, and I've
-          had the opportunity to work on a wide range of projects, from small
-          websites to large-scale applications. I'm currently working at a
-          startup where I'm responsible for building and maintaining the
-          company's web platform.
-        </p>
-      </div>
+      {render()}
 
-      <div className="mt-8 content">
-        <h2 className="text-2xl font-bold mb-4">Experience</h2>
-        <p>
-          I've been working as a software engineer for over 5 years, and I've
-          had the opportunity to work on a wide range of projects, from small
-          websites to large-scale applications. I'm currently working at a
-          startup where I'm responsible for building and maintaining the
-          company's web platform.
-        </p>
+      <div className="flex flex-col mt-12">
+          <h4 className="uppercase font-bold"> User Manual</h4>
+
+          <div className="">
+              I created a playbook on how to <Link to={"/manual"} className="text-blue-600">work with me</Link>. It captures some of my strengths, weaknesses, and principles that I aim to follow.
+          </div>
       </div>
     </div>
+
+
   );
 }

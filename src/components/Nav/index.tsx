@@ -15,7 +15,7 @@ const Nav = () => {
   return (
     <nav className="py-8">
       <div className="max-w-7xl mx-auto flex justify-between items-center ">
-        <div className=" text-2xl font-bold">
+        <div className="text-2xl font-bold">
           <Link to="/" className="font-family-system">
             IURE.DEV
           </Link>

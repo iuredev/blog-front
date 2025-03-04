@@ -6,10 +6,10 @@ export const formatDate = ( date: string, locale:  Intl.LocalesArgument = "en-US
   });
 };
 
-export const minutesToRead = (content: string) => {
-  const wordsPerMinute = 200;
+export const minutesToRead = (content: string = "") => {
+  const wordsPerMinute = 130;
   const wordCount = content.trim().split(/\s+/).length;
-   const minutesToRead = Math.ceil(wordCount / wordsPerMinute);
+  const minutesToRead = Math.ceil(wordCount / wordsPerMinute);
 
   return `${minutesToRead} min`;
 };
