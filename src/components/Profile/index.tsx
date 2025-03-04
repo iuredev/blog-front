@@ -5,7 +5,7 @@ const Profile = () => {
   return (
     <div className="dark:bg-gray-900 py-4">
       <div className="gap-2 md:gap-8 max-w-4xl mx-auto text-center flex flex-col md:flex-row items-center md:items-start">
-        <div className="max-h-142 w-52 h-52 md:w-132 md:h-132 profile-image rounded-full border-2 border-gradient border-opacity-50">
+        <div className="max-h-142 w-52 h-52 md:w-132 md:h-132 profile-image ">
           <img
             src="public/iure.jpg"
             alt="Iure Gomes"
@@ -14,10 +14,10 @@ const Profile = () => {
         </div>
 
         <div className="md:text-left">
-          <h1 className="text-3xl font-semibold md:text-3xl mt-4 md:mt-0 text-gray-200">
+          <h1 className="text-3xl font-semibold md:text-2xl mt-4 md:mt-0 text-gray-200">
             <Link to="/about" className="text-gray-400">
-              Hey, I'm Iure 
-            </Link>, a software engineer
+              Yo, I'm Iure 
+            </Link>, a software engineer messing with lines of code to make things work.
           </h1>
 
           <div className="flex justify-center md:justify-start space-x-6 mt-6 text-sm">
