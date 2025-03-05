@@ -7,7 +7,7 @@ const Profile = () => {
       <div className="gap-2 md:gap-8 max-w-4xl mx-auto text-center flex flex-col md:flex-row items-center md:items-start">
         <div className="max-h-142 w-52 h-52 md:w-132 md:h-132 profile-image ">
           <img
-            src="public/iure.jpg"
+            src="iure.jpg"
             alt="Iure Gomes"
             className=" object-contain object-center rounded-full "
           />
