@@ -17,7 +17,7 @@ export default function Home() {
     }
 
     if (isError) {
-      return <div>Error</div>;
+      return <div>Ops... something went wrong</div>;
     }
 
     if(!posts) {

@@ -39,7 +39,7 @@ export default function Blog() {
 
       <div className="mt-8">
         {render()}        
-        <Pagination totalPages={pagination?.pageCount || 1} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+        <Pagination totalPages={pagination && pagination?.pageCount || 1} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
       </div>
     </div>
   );
