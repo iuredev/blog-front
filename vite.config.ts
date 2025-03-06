@@ -1,15 +1,25 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react-swc";
 
 // https://vite.dev/config/
-export default defineConfig({
-  server: {
-    port: 5174,
-    host: true,
-  },
-  preview: {
-    port: 5174,
-    host: true,
-  },
-  plugins: [react()],
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "");
+  console.log(env);
+  return {
+    server: {
+      port: parseInt(env.VITE_PORT || "5174"),
+    },
+    preview: {
+      port: parseInt(env.VITE_PORT || "5174"),
+      host: true,
+      allowedHosts: [
+        "localhost",
+        "127.0.0.1",
+        "0.0.0.0",
+        "www.iure.site",
+        "iure.site",
+      ],
+    },
+    plugins: [react()],
+  };
 });
