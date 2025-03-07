@@ -18,6 +18,7 @@ export default defineConfig(({ mode }) => {
         "0.0.0.0",
         "www.iure.site",
         "iure.site",
+        "dev.iure.site",
       ],
     },
     plugins: [react()],
