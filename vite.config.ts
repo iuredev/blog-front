@@ -7,6 +7,7 @@ export default defineConfig(({ mode }) => {
   return {
     server: {
       port: parseInt(env.VITE_PORT || "5174"),
+      host: true,
     },
     preview: {
       port: parseInt(env.VITE_PORT || "5174"),
@@ -24,7 +25,6 @@ export default defineConfig(({ mode }) => {
         "/api": {
           target: `${env.VITE_API_URL}/api`,
         },
-
         "/admin": {
           target: `${env.VITE_API_URL}/admin`,
         },
