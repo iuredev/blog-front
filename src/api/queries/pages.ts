@@ -5,9 +5,7 @@ const VITE_API_KEY = import.meta.env.VITE_API_KEY;
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 
 export const getPage = async (page: PageType) => {
-  console.log("VITE_API_URL", VITE_API_URL);
-
-  const response = await axios.get(`${VITE_API_URL}/api/${page}?populate=*`, {
+  const response = await axios.get(`${VITE_API_URL}/${page}?populate=*`, {
     headers: {
       Authorization: `Bearer ${VITE_API_KEY}`,
     },

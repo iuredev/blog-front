@@ -4,6 +4,7 @@ import ReactMarkdown, { Components } from "react-markdown";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 import "./style.css";
 interface MarkdownRendererProps {
   content: string;
@@ -42,6 +43,7 @@ export default function Markdown({ content }: MarkdownRendererProps) {
     <div className="prose prose-lg dark:prose-invert">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]}
         components={renderers}
         className="markdown"
       >
