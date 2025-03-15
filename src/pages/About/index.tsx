@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { useGetPage } from "../../api/hooks";
 import { Error, Loading, Markdown } from "../../components";
 import useHelmet from "../../hooks";
+import { FaArrowRight } from "react-icons/fa";
 
 export default function About() {
 
@@ -39,7 +40,18 @@ export default function About() {
           <h4 className="uppercase font-bold"> User Manual</h4>
 
           <div className="">
-              I created a playbook on how to <Link to={"/manual"} className="text-blue-600">work with me</Link>. It captures some of my strengths, weaknesses, and principles that I aim to follow.
+              I created a playbook on how to <Link to={"/manual"} className="text-blue-600 "><strong>work with me</strong></Link>. It captures some of my strengths, weaknesses, and principles that I aim to follow.
+          </div>
+
+          <div className="flex gap-2 items-center text-blue-600 hover:text-blue-600 mt-2">
+              <Link
+                to="/manual"
+                className=""
+              >
+               <strong>More about me</strong> 
+              </Link>
+
+              <FaArrowRight   />
           </div>
       </div>
     </div>
