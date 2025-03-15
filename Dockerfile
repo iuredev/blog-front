@@ -8,11 +8,19 @@ RUN npm run build
 
 FROM node:22-alpine AS production_image
 WORKDIR /app
-COPY --from=build_image /app/dist/ /app/dist/
+
+FROM nginx:alpine
+COPY --from=build_image /app/dist/ /usr/share/nginx/html
 COPY package.json vite.config.ts ./
-RUN npm install typescript
 
-ENV PORT=5174
-EXPOSE ${PORT}
+RUN echo 'server { \
+  listen 80; \
+  root /usr/share/nginx/html; \
+  index index.html; \
+  location / { \
+  try_files $uri $uri/ /index.html; \
+  } \
+  }' > /etc/nginx/conf.d/default.conf
 
-CMD ["npm", "run", "preview"]
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
