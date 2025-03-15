@@ -12,6 +12,7 @@ export const useGetPosts = (pageSize: number = 10, page?: number) => {
   const { data, isLoading, isFetching, isError } = useQuery({
     queryKey: [keys.POSTS],
     queryFn: () => getPosts(pageSize, page),
+
     ...defaultConfig,
   });
 
@@ -37,6 +38,7 @@ export const useGetPostsPaginated = (pageSize: number = 10, page: number) => {
     queryFn: () => getPosts(pageSize, page),
     notifyOnChangeProps: ["data"],
     placeholderData: keepPreviousData,
+    ...defaultConfig,
   });
 
   return {

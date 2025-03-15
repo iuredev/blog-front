@@ -20,15 +20,6 @@ export default defineConfig(({ mode }) => {
         "iure.site",
         "dev.iure.site",
       ],
-
-      proxy: {
-        "/api": {
-          target: `${env.VITE_API_URL}/api`,
-        },
-        // "/admin": {
-        //   target: `${env.VITE_API_URL}/admin`,
-        // },
-      },
     },
     plugins: [react()],
   };
