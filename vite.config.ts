@@ -25,9 +25,9 @@ export default defineConfig(({ mode }) => {
         "/api": {
           target: `${env.VITE_API_URL}/api`,
         },
-        "/admin": {
-          target: `${env.VITE_API_URL}/admin`,
-        },
+        // "/admin": {
+        //   target: `${env.VITE_API_URL}/admin`,
+        // },
       },
     },
     plugins: [react()],
