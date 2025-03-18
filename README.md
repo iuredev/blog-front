@@ -18,15 +18,13 @@ I regularly update this blog with new posts. Here are some of the categories you
 
 - **Technology**: Latest trends, tutorials, and reviews.
 - **Lifestyle**: Tips and stories about daily life.
-- **Travel**: My adventures and travel guides.
 - **Personal Development**: Thoughts on growth and self-improvement.
 
 ## Contact
 
 Feel free to reach out to me through the following channels:
 
-- **Email**: [your.email@example.com](mailto:your.email@example.com)
-- **Twitter**: [@yourhandle](https://twitter.com/yourhandle)
-- **LinkedIn**: [Your Profile](https://linkedin.com/in/yourprofile)
+- **Email**: [iure.sgz@gmail.com](mailto:iure.sgz@gmail.com)
+- **LinkedIn**: [Iure Silva](https://linkedin.com/in/iure-silva)
 
 Thank you for visiting my blog! Stay tuned for more updates.
