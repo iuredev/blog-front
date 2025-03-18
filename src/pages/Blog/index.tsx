@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Error, Loading, PostLink } from "../../components";
 import Pagination from "../../components/Pagination";
 import useHelmet from "../../hooks";
+import EmptyPosts from "../EmptyPosts";
 
 export default function Blog() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,6 +18,10 @@ export default function Blog() {
 
     if (isError) {
       return <Error />;
+    }
+
+    if (posts.length === 0) {
+      <EmptyPosts />
     }
 
 
