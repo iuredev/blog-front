@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { Loading, PostLink, Profile } from "../../components";
 import { useGetPosts } from "../../api/hooks";
 import useHelmet from "../../hooks";
+import EmptyPosts from "../EmptyPosts";
 
 
 
@@ -20,8 +21,8 @@ export default function Home() {
       return <div>Ops... something went wrong</div>;
     }
 
-    if(!posts) {
-      return <div>No posts</div>
+    if(!posts || posts.length === 0) {
+      return <EmptyPosts />
     }
 
     return (
