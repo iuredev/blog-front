@@ -30,7 +30,7 @@ export default function Post() {
       return (
         <div className="flex flex-col">
           <h1 className="text-4xl font-bold">{data?.title}</h1>
-          <p className="mb-4 text-gray-400">{formatDate("2025-02-05T01:59:57Z")} • {data.category && `${data.category.name} •`} {minutesToRead(data?.content)}</p>
+          <p className="mb-4 text-gray-400">{formatDate(data?.publishedAt)} • {data.category && `${data.category.name} •`} {minutesToRead(data?.content)}</p>
           <div className="content grid grid-cols-1 mt-6 text-base md:text-[1.05rem]">
             <Markdown content={data.content} />
           </div>
