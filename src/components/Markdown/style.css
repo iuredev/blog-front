@@ -1,6 +1,7 @@
 @import url("../../global.css");
 
 .markdown {
+  line-height: 1.7rem;
   a {
     color: #007bff;
     text-decoration: none;
@@ -9,6 +10,10 @@
   ul,
   ol {
     padding-left: 33px;
+
+    li {
+      line-height: 1.6rem;
+    }
   }
 
   h2,
@@ -19,6 +24,7 @@
     text-transform: uppercase;
     font-weight: bold;
     margin-top: 1.7rem;
+    margin-bottom: 0.3rem;
   }
 
   table {

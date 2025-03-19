@@ -24,7 +24,7 @@ export default function About() {
        return (
          <div className="flex flex-col gap-8">
            <h1 className="text-4xl font-bold">{data?.title} </h1> 
-           <div className="content grid grid-cols-1">
+           <div className="content grid grid-cols-1 ">
              <Markdown content={data.content} />
            </div>
          </div>
