@@ -1,4 +1,4 @@
-@import url('../../global.css');
+@import url("../../global.css");
 
 .markdown {
   a {
@@ -6,15 +6,56 @@
     text-decoration: none;
   }
 
-  ul, ol {
+  ul,
+  ol {
     padding-left: 33px;
-    
   }
 
-  h2 {
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     text-transform: uppercase;
     font-weight: bold;
-    margin-bottom: 8px;
+    margin-top: 1.7rem;
   }
- 
+
+  table {
+    width: 100%;
+    font-size: smaller;
+    border-collapse: collapse;
+    font-family: Calibri, sans-serif;
+    line-height: normal;
+
+    thead th {
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: bold;
+      text-transform: uppercase;
+      border: 1px solid #6f6b6b;
+      background-color: #041529;
+    }
+
+    tbody td {
+      padding: 10px 12px;
+      border: 1px solid #6f6b6b;
+      vertical-align: middle;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #202327;
+    }
+  }
+
+  code {
+    color: #f8f9fa;
+    background-color: #343a40;
+    padding: 0 4px;
+    border-radius: 4px;
+    font-size: 80%;
+    display: inline-block;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+  }
 }

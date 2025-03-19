@@ -25,6 +25,14 @@ export default function Markdown({ content }: MarkdownRendererProps) {
         fontSize: "14px",
       };
 
+      if (!language) {
+        return (
+          <code className={className} {...props}>
+            {children}
+          </code>
+        );
+      }
+
       return (
         <SyntaxHighlighter
           language={language}
@@ -42,6 +50,9 @@ export default function Markdown({ content }: MarkdownRendererProps) {
     ),
     ol: ({ children }: MarkdownPayload) => (
       <ol className="list-decimal">{children}</ol>
+    ),
+    pre: ({ children }: MarkdownPayload) => (
+      <div className="prose">{children}</div>
     )
   };
 
