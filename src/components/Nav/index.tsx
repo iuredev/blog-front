@@ -45,10 +45,10 @@ const Nav = () => {
             isOpen ? "block" : "hidden"
           } lg:block`}
         >
-          <Link to="/about" className="text-white px-3 py-2">
+          <Link to="/about" className="text-gray-300 px-3 py-2">
             About
           </Link>
-          <Link to="/blog" className="text-white  px-3 py-2">
+          <Link to="/blog" className="text-gray-300  px-3 py-2">
             Blog
           </Link>
         </div>
@@ -60,11 +60,11 @@ const Nav = () => {
           onClick={closeMenu}
         >
           <div
-            className="bg-gray-900 w-full h-full p-8 flex flex-col justify-center items-center text-white space-y-6"
+            className="bg-gray-900 w-full h-full p-8 flex flex-col justify-center items-center text-gray-300 space-y-6"
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              className="absolute top-4 right-4 text-white text-2xl"
+              className="absolute top-4 right-4 text-gray-300 text-2xl"
               onClick={closeMenu}
             >
               <svg
@@ -84,14 +84,14 @@ const Nav = () => {
             </button>
             <Link
               to="/"
-              className="text-white text-2xl  px-6 py-2"
+              className="text-gray-300 text-2xl  px-6 py-2"
               onClick={closeMenu}
             >
               Home
             </Link>
             <Link
               to="/about"
-              className="text-white text-2xl  px-6 py-2"
+              className="text-gray-300 text-2xl  px-6 py-2"
               onClick={closeMenu}
             >
               About
@@ -99,7 +99,7 @@ const Nav = () => {
 
             <Link
               to="/blog"
-              className="text-white text-2xl  px-6 py-2"
+              className="text-gray-300 text-2xl  px-6 py-2"
               onClick={closeMenu}
             >
               Blog
