@@ -23,6 +23,7 @@
 
   table {
     width: 100%;
+
     font-size: smaller;
     border-collapse: collapse;
     font-family: Calibri, sans-serif;
@@ -57,5 +58,19 @@
     display: inline-block;
     font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .markdown {
+    table {
+      thead th {
+        padding: 2px 4px;
+      }
+
+      tbody td {
+        padding: 2px 4px;
+      }
+    }
   }
 }

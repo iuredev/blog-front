@@ -51,13 +51,10 @@ export default function Markdown({ content }: MarkdownRendererProps) {
     ol: ({ children }: MarkdownPayload) => (
       <ol className="list-decimal">{children}</ol>
     ),
-    pre: ({ children }: MarkdownPayload) => (
-      <div className="prose">{children}</div>
-    )
   };
 
   return (
-    <div className="prose prose-lg dark:prose-invert">
+    <div >
       <ReactMarkdown
         rehypePlugins={[rehypeRaw]}
         remarkPlugins={[remarkGfm]}
