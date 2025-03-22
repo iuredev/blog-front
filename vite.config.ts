@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import { VitePluginRadar } from "vite-plugin-radar";
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
@@ -20,8 +21,21 @@ export default defineConfig(({ mode }) => {
         "www.iure.site",
         "iure.site",
         "dev.iure.site",
+        "iure.dev",
+        "www.iure.dev",
+        "dev.iure.dev",
       ],
     },
-    plugins: [react()],
+    plugins: [
+      react(),
+      VitePluginRadar({
+        enableDev: true,
+        analytics: [
+          {
+            id: env.VITE_GOOGLE_ANALYTICS_ID,
+          },
+        ],
+      }),
+    ],
   };
 });
