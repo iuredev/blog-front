@@ -13,6 +13,7 @@ export default function Post() {
 
   const { posts } = useGetRandomPosts(!isLoading ? data?.id : undefined);
 
+
   useHelmet(isLoading ? "Iure.dev" : data?.title || "Iure.dev", data?.description || "");
 
   const render = () => {

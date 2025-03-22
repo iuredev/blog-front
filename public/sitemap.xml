@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://iure.dev</loc>
+    <changefreq>daily</changefreq>
+    <priority>1</priority>
+    
+  </url>
+  <url>
+    <loc>https://iure.dev/blog</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    
+  </url>
+  <url>
+    <loc>https://iure.dev/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    
+  </url>
+  <url>
+    <loc>https://iure.dev/manual</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    
+  </url>
+  <url>
+    <loc>https://iure.dev/blog/teste</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2025-03-15T16:20:07.062Z</lastmod>
+  </url>
+  <url>
+    <loc>https://iure.dev/blog/title</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2025-03-15T16:32:11.400Z</lastmod>
+  </url>
+  <url>
+    <loc>https://iure.dev/blog/graph-ql-vs-rest-api-key-differences-and-when-to-use-each</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2025-03-19T01:10:08.616Z</lastmod>
+  </url>
+  <url>
+    <loc>https://iure.dev/blog/let-s-talk-self-hosting-your-own-digital-playground</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2025-03-22T14:47:58.746Z</lastmod>
+  </url>
+</urlset>
