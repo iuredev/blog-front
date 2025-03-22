@@ -11,7 +11,7 @@ export default function Layout({ children }: LayoutProps) {
       <header className="md:px-0 px-6">
         <Nav />
       </header>
-      <main className="flex-grow container mb-5 md:px-0 px-6 py-14">{children}</main>
+      <main className="flex-grow container mb-5 md:px-0 px-6 pt-14 pb-4">{children}</main>
 
       <footer className="p-6 md:p-0 md:py-2">
         <Footer />

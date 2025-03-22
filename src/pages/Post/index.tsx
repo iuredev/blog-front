@@ -9,14 +9,13 @@ import useHelmet from "../../hooks";
 export default function Post() {
   const { slug } = useParams<{ slug: string }>();
 
-  const { data, isLoading, isError,   } = useGetPostBySlug(slug as string);
+  const { data, isLoading, isError, } = useGetPostBySlug(slug as string);
 
-  const  { posts } = useGetRandomPosts(!isLoading ? data?.id : undefined);
-  
-  useHelmet( isLoading ? "Iure.dev" : data?.title || "Iure.dev", data?.description || "");
+  const { posts } = useGetRandomPosts(!isLoading ? data?.id : undefined);
+
+  useHelmet(isLoading ? "Iure.dev" : data?.title || "Iure.dev", data?.description || "");
 
   const render = () => {
-
 
     if (isLoading) {
       return <Loading />;
@@ -45,14 +44,15 @@ export default function Post() {
   return (
     <div className="flex flex-col ">
       {render()}
-      
 
-        {!isLoading && !isError && (<div className="mt-16">          
-          {posts.length > 0 && posts.map((post) => (
-            <PostLink key={post.id} post={post} preview={false} />
-          ))}
+
+      {!isLoading && !isError && (<div className="mt-16">
+        <h2 className="text-2xl font-bold">Other posts</h2>
+        {posts.length > 0 && posts.map((post) => (
+          <PostLink key={post.id} post={post} preview={false} />
+        ))}
       </div>)}
-      
+
     </div>
   );
 }

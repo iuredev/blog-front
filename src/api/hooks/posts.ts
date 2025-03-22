@@ -1,19 +1,13 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getPostBySlug, getPosts } from "../queries";
 import { keys } from "../keys";
-
-const defaultConfig = {
-  refetchOnWindowFocus: false,
-  staleTime: 1000 * 60,
-  cacheTime: 1000 * 60,
-};
+import { defaultOptionsReactQuery } from "./utils";
 
 export const useGetPosts = (pageSize: number = 10, page?: number) => {
   const { data, isLoading, isFetching, isError } = useQuery({
     queryKey: [keys.POSTS],
     queryFn: () => getPosts(pageSize, page),
-
-    ...defaultConfig,
+    ...defaultOptionsReactQuery,
   });
 
   return {
@@ -28,7 +22,7 @@ export const useGetPostBySlug = (slug: string) => {
   return useQuery({
     queryKey: [keys.POST_BY_SLUG, slug],
     queryFn: () => getPostBySlug(slug),
-    ...defaultConfig,
+    ...defaultOptionsReactQuery,
   });
 };
 
@@ -38,7 +32,7 @@ export const useGetPostsPaginated = (pageSize: number = 10, page: number) => {
     queryFn: () => getPosts(pageSize, page),
     notifyOnChangeProps: ["data"],
     placeholderData: keepPreviousData,
-    ...defaultConfig,
+    ...defaultOptionsReactQuery,
   });
 
   return {
@@ -50,10 +44,12 @@ export const useGetPostsPaginated = (pageSize: number = 10, page: number) => {
   };
 };
 
+// weak logic, should be improved (should be a better way to get random posts)
 export const useGetRandomPosts = (currentPostId?: number) => {
   const { data, isLoading, isFetching, isError } = useQuery({
     queryKey: [keys.POSTS_RELATED],
     queryFn: () => getPosts(1000),
+    ...defaultOptionsReactQuery,
   });
 
   const pickTreeRandomPosts = () => {
