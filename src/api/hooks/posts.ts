@@ -2,6 +2,7 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getPostBySlug, getPosts } from "../queries";
 import { keys } from "../keys";
 import { defaultOptionsReactQuery } from "./utils";
+import { Post } from "../../types";
 
 export const useGetPosts = (pageSize: number = 10, page?: number) => {
   const { data, isLoading, isFetching, isError } = useQuery({
@@ -44,7 +45,7 @@ export const useGetPostsPaginated = (pageSize: number = 10, page: number) => {
   };
 };
 
-// weak logic, should be improved (should be a better way to get random posts)
+// weak logic, should be improved (should be a better way to get random posts) by using backend
 export const useGetRandomPosts = (currentPostId?: number) => {
   const { data, isLoading, isFetching, isError } = useQuery({
     queryKey: [keys.POSTS_RELATED],
@@ -53,25 +54,34 @@ export const useGetRandomPosts = (currentPostId?: number) => {
   });
 
   const pickTreeRandomPosts = () => {
-    const randomPosts = [];
+    if (!data?.data?.length) return [];
 
-    if (data) {
-      if (currentPostId) {
-        const currentIndex = data?.data.findIndex(
-          (post) => post.id === currentPostId
-        );
+    const availablePosts = [...data.data];
 
-        if (currentIndex !== -1) {
-          data?.data.splice(currentIndex, 1);
-        }
-      }
-
-      for (let i = 0; i < 3; i++) {
-        const randomIndex = Math.floor(Math.random() * data?.data.length);
-        randomPosts.push(data?.data[randomIndex]);
+    if (currentPostId) {
+      const currentIndex = availablePosts.findIndex(
+        (post) => post.id === currentPostId
+      );
+      if (currentIndex !== -1) {
+        availablePosts.splice(currentIndex, 1);
       }
     }
-    return randomPosts;
+
+    if (!availablePosts.length) return [];
+
+    const randomPosts: Post[] = [];
+    const numPostsToGet = Math.min(3, availablePosts.length);
+
+    while (randomPosts.length < numPostsToGet) {
+      const randomIndex = Math.floor(Math.random() * availablePosts.length);
+      const post = availablePosts[randomIndex];
+
+      if (!randomPosts.includes(post)) {
+        randomPosts.push(post);
+        availablePosts.splice(randomIndex, 1);
+      }
+    }
+    return randomPosts.length > 0 ? randomPosts : [availablePosts[0]];
   };
 
   const posts = Array.from(new Set(pickTreeRandomPosts())).filter(

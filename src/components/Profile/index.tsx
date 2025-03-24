@@ -16,7 +16,7 @@ const Profile = () => {
         <div className="md:text-left">
           <h1 className="text-3xl font-semibold md:text-2xl mt-4 md:mt-0 text-gray-200">
             <Link to="/about" className="text-gray-400">
-              Yo, I'm Iure 
+              Yo, I'm Iure
             </Link>, a software engineer messing with lines of code to make things work.
           </h1>
 
@@ -25,6 +25,7 @@ const Profile = () => {
               href="https://instagram.com/iure.dev"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Instagram"
               className="flex items-center space-x-2 *:hover:text-pink-500 *:transition *:duration-300"
             >
               <FaInstagram className="h-6 w-6 text-gray-300 " />
@@ -34,6 +35,7 @@ const Profile = () => {
               href="https://linkedin.com/in/iure-silva"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="LinkedIn"
               className="flex items-center space-x-2 *:hover:text-blue-700  *:transition *:duration-300"
             >
               <FaLinkedin className="h-6 w-6 text-gray-300" />
@@ -43,6 +45,7 @@ const Profile = () => {
               href="https://github.com/iuredev"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="GitHub"
               className="flex items-center space-x-2 *:hover:text-gray-500 *:transition *:duration-300"
             >
               <FaGithub className="h-6 w-6 text-gray-300" />

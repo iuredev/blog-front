@@ -12,6 +12,7 @@ const Footer = () => {
             href="https://instagram.com/iure.dev"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Instagram"
           >
             <FaInstagram className="h-6 w-6 sm:h-5 sm:w-5 text-gray-300 hover:text-pink-500 transition duration-300" />
           </a>
@@ -19,6 +20,7 @@ const Footer = () => {
             href="https://linkedin.com/in/iure-silva"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="LinkedIn"
           >
             <FaLinkedin className="h-6 w-6 sm:h-5 sm:w-5 text-gray-300 hover:text-blue-700 transition duration-300" />
           </a>
@@ -26,6 +28,7 @@ const Footer = () => {
             href="https://github.com/iuredev"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="GitHub"
           >
             <FaGithub className="h-6 w-6 sm:h-5 sm:w-5 text-gray-300 hover:text-gray-500 transition duration-300" />
           </a>
