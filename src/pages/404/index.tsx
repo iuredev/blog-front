@@ -1,8 +1,8 @@
 import { Link } from "react-router";
-import useHelmet from "../../hooks";
+import { useHelmet } from "../../hooks";
 
 export default function NotFoundPage() {
-  useHelmet("404");
+  useHelmet("404", "Page Not Found");
 
   return (
     <div className="flex items-center justify-center h-full">

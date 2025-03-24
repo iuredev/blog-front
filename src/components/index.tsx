@@ -6,3 +6,4 @@ export { default as Markdown } from "./Markdown";
 export { default as Pagination } from "./Pagination";
 export { default as PostLink } from "./PostLink";
 export { default as Error } from "./Error";
+export { default as ShareSocialMedia } from "./ShareSocialMedia";
