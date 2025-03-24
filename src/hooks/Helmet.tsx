@@ -1,9 +1,9 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { useEffect } from 'react';
 
 export default function useHelmet(title: string, description?: string, image?: string, keywords?: string[]) {
   const siteUrl = 'https://www.iure.dev';
-  const defaultDescription = 'Personal blog of Iure Gomes - Software Engineer sharing thoughts on technology, lifestyle, tutorials and personal development.';
+  const defaultDescription = 'Personal blog of Iure - Software Engineer sharing thoughts on technology, lifestyle, tutorials and personal development.';
   const defaultImage = `${siteUrl}/iure.jpg`;
 
   const currentUrl = typeof window !== 'undefined' ? window.location.href : siteUrl;
@@ -14,8 +14,8 @@ export default function useHelmet(title: string, description?: string, image?: s
     const metaKeywords = document.querySelector('meta[name="keywords"]');
 
     if (metaDescription) {
-      metaDescription.setAttribute('content', description || defaultDescription);
       metaDescription.setAttribute('property', 'og:description');
+      metaDescription.setAttribute('content', description || defaultDescription);
     }
     if (metaKeywords && keywords) {
       const existingKeywords = metaKeywords.getAttribute('content') || '';
@@ -24,16 +24,7 @@ export default function useHelmet(title: string, description?: string, image?: s
       metaKeywords.setAttribute('content', newKeywords);
     }
 
-    return () => {
-      document.title = '';
-      if (metaDescription) {
-        metaDescription.setAttribute('content', '');
-      }
 
-      if (metaKeywords) {
-        metaKeywords.setAttribute('content', '');
-      }
-    };
   }, [title, description, keywords]);
 
   return (
@@ -43,7 +34,7 @@ export default function useHelmet(title: string, description?: string, image?: s
       <meta property="og:type" content="website" />
       <meta property="og:url" content={currentUrl} />
       <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
+      <meta property="og:description" content={description || defaultDescription} />
       <meta property="og:image" content={image || defaultImage} />
       <meta property="og:site_name" content="Iure.dev" />
       <meta property="og:keywords" content={keywords?.join(', ') || ''} />
