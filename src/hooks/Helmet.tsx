@@ -14,7 +14,6 @@ export default function useHelmet(title: string, description?: string, image?: s
     const metaKeywords = document.querySelector('meta[name="keywords"]');
 
     if (metaDescription) {
-      metaDescription.setAttribute('property', 'og:description');
       metaDescription.setAttribute('content', description || defaultDescription);
     }
     if (metaKeywords && keywords) {
@@ -25,19 +24,24 @@ export default function useHelmet(title: string, description?: string, image?: s
     }
 
 
+
+    console.log(title, description, keywords);
   }, [title, description, keywords]);
 
   return (
     <Helmet>
       <title>{title}</title>
-      <meta name="description" content={description || defaultDescription} />
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content={currentUrl} />
       <meta property="og:title" content={title} />
+
+      <meta name="description" content={description || defaultDescription} />
+      <meta property="og:url" content={currentUrl} />
       <meta property="og:description" content={description || defaultDescription} />
+      <meta property="og:type" content="website" />
       <meta property="og:image" content={image || defaultImage} />
       <meta property="og:site_name" content="Iure.dev" />
       <meta property="og:keywords" content={keywords?.join(', ') || ''} />
+
+      
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content={currentUrl} />
       <meta name="twitter:title" content={title} />

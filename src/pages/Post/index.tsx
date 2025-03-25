@@ -3,9 +3,9 @@ import "tailwindcss/tailwind.css";
 import { Error, Loading, Markdown, PostLink } from "../../components";
 import { formatDate, minutesToRead } from "../../utils";
 import { useGetPostBySlug, useGetRandomPosts } from "../../api/hooks";
-import { useHelmet } from "../../hooks";
+// import { useHelmet } from "../../hooks";
 import { ShareSocialMedia } from "../../components";
-
+import { Helmet } from "react-helmet-async";
 
 export default function Post() {
   const { slug } = useParams<{ slug: string }>();
@@ -15,7 +15,7 @@ export default function Post() {
   const { posts } = useGetRandomPosts(!isLoading ? data?.id : undefined);
 
 
-  useHelmet(isLoading ? "Iure.dev" : data?.title || "Iure.dev", data?.description || "", "", data?.category?.name ? [data?.category?.name] : undefined);
+
 
 
 
@@ -32,6 +32,11 @@ export default function Post() {
 
     if (data) {
       return (
+        <>
+        <Helmet>
+          <title>{data.title}</title>
+          <meta name="description" content={data.description} />
+        </Helmet>
         <div className="flex flex-col">
           <h1 className="text-4xl font-bold">{data?.title}</h1>
           <p className="flex items-center gap-2  text-gray-400">{formatDate(data?.publishedAt)} • {data.category && `${data.category.name} •`}
@@ -44,6 +49,7 @@ export default function Post() {
             <Markdown content={data.content} />
           </div>
         </div>
+        </>
       );
     }
 
