@@ -1,7 +1,7 @@
 import axios from "axios";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
-import { writeFileSync } from "fs";
+import { write, writeFileSync } from "fs";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -48,6 +48,9 @@ async function generateSitemap() {
         priority: 0.7,
       },
     ];
+
+    const postsMetadata = {};
+
     posts.forEach((post) => {
       urls.push({
         loc: `${siteUrl}/blog/${post.slug}`,
@@ -55,6 +58,14 @@ async function generateSitemap() {
         priority: 0.8,
         lastmod: post.updatedAt,
       });
+
+      postsMetadata[post.slug] = {
+        title: post.title,
+        description: post.description,
+        content: post.content,
+        publishedAt: post.publishedAt,
+        category: post.category && post.category.name,
+      };
     });
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -73,6 +84,11 @@ async function generateSitemap() {
 </urlset>`;
 
     writeFileSync(join(dirname(__dirname), "public", "sitemap.xml"), sitemap);
+    writeFileSync(
+      join(dirname(__dirname), "src", "posts.json"),
+      JSON.stringify(postsMetadata)
+    );
+
     console.log("Sitemap generated successfully!");
   } catch (error) {
     console.error("Error generating sitemap:", error);
