@@ -1,5 +1,7 @@
+'use client'
 import { useState } from "react";
-import { Link } from "react-router";
+import Link from "next/link";
+// import { ThemeToggle } from "@/components";
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,15 +16,15 @@ const Nav = () => {
 
   return (
     <nav className="py-8">
-      <div className="max-w-7xl mx-auto flex justify-between items-center ">
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="text-2xl font-bold">
-          <Link to="/" className="font-family-system">
+          <Link href="/" className="font-family-system text-gray-900 dark:text-gray-300">
             IURE.DEV
           </Link>
         </div>
 
         <div className="lg:hidden">
-          <button onClick={toggleMenu}>
+          <button onClick={toggleMenu} className="text-gray-900 dark:text-gray-300">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -41,16 +43,15 @@ const Nav = () => {
         </div>
 
         <div
-          className={`lg:flex space-x-4 ${
-            isOpen ? "block" : "hidden"
-          } lg:block`}
+          className={`lg:flex items-center space-x-4 ${isOpen ? "block" : "hidden"} lg:block`}
         >
-          <Link to="/about" className="text-gray-300 px-3 py-2">
+          <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 px-3 py-2">
             About
           </Link>
-          <Link to="/blog" className="text-gray-300  px-3 py-2">
+          <Link href="/blog" className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 px-3 py-2">
             Blog
           </Link>
+          {/* <ThemeToggle /> */}
         </div>
       </div>
 
@@ -83,27 +84,27 @@ const Nav = () => {
               </svg>
             </button>
             <Link
-              to="/"
-              className="text-gray-300 text-2xl  px-6 py-2"
+              href="/"
+              className="text-gray-300 text-2xl px-6 py-2"
               onClick={closeMenu}
             >
               Home
             </Link>
             <Link
-              to="/about"
-              className="text-gray-300 text-2xl  px-6 py-2"
+              href="/about"
+              className="text-gray-300 text-2xl px-6 py-2"
               onClick={closeMenu}
             >
               About
             </Link>
-
             <Link
-              to="/blog"
-              className="text-gray-300 text-2xl  px-6 py-2"
+              href="/blog"
+              className="text-gray-300 text-2xl px-6 py-2"
               onClick={closeMenu}
             >
               Blog
             </Link>
+            {/* <ThemeToggle /> */}
           </div>
         </div>
       )}

@@ -1,15 +1,16 @@
-import { Link } from "react-router";
-import { Loading, PostLink, Profile } from "../../components";
-import { useGetPosts } from "../../api/hooks";
-import { useHelmet } from "../../hooks";
-import EmptyPosts from "../EmptyPosts";
+'use client'
 
-
+import { useGetPosts } from "@/api/hooks";
+import { Loading, PostLink } from "@/components";
+import { Profile } from "@/components";
+import { Post } from "@/types";
+import Link from "next/link";
 
 export default function Home() {
 
+
   const { posts, isLoading, isError } = useGetPosts(3);
-  useHelmet("Iure.dev");
+
 
 
   const render = () => {
@@ -22,11 +23,11 @@ export default function Home() {
     }
 
     if (!posts || posts.length === 0) {
-      return <EmptyPosts />
+      return <div>No posts found</div>
     }
 
     return (
-      posts.map((post) => (
+      posts.map((post: Post) => (
         <PostLink key={post.id} post={post} preview />
       ))
     )
@@ -44,7 +45,7 @@ export default function Home() {
 
 
         <div className="mt-8">
-          <Link to="/blog" className="text-blue-500">
+          <Link href="/blog" className="text-blue-500">
             View all posts
           </Link>
         </div>

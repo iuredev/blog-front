@@ -1,15 +1,13 @@
-import { useGetPostsPaginated } from "../../api/hooks";
-import { useState } from "react";
-import { Error, Loading, PostLink } from "../../components";
-import Pagination from "../../components/Pagination";
-import { useHelmet } from "../../hooks";
-import EmptyPosts from "../EmptyPosts";
+'use client'
 
-export default function Blog() {
+import { useGetPostsPaginated } from "@/api/hooks";
+import { PostLink, Error, Loading, Pagination } from "@/components";
+import { Post } from "@/types";
+import { useState } from "react";
+
+export default function ClientBlog() {
   const [currentPage, setCurrentPage] = useState(1);
   const { posts = [], pagination, isLoading, isError } = useGetPostsPaginated(10, currentPage);
-
-  useHelmet("Blog", "Blog - Iure.dev");
 
   const render = () => {
     if (isLoading) {
@@ -21,31 +19,31 @@ export default function Blog() {
     }
 
     if (posts.length === 0) {
-      <EmptyPosts />
+      return <div>No posts found</div>
     }
 
-
     return (
-      posts.map((post) => (
+      posts.map((post: Post) => (
         <PostLink key={post.id} post={post} preview={false} />
       ))
     )
-
   }
-
 
   return (
     <div>
-      <div >
-        <h1 className="text-4xl font-bold ">Blog</h1>
+      <div>
+        <h1 className="text-4xl font-bold">Blog</h1>
         <p className="text-gray-400">This is where I write about things that interest me. Enjoy reading it! 🙂</p>
       </div>
 
-
       <div className="mt-8">
         {render()}
-        <Pagination totalPages={pagination && pagination?.pageCount || 1} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        <Pagination
+          totalPages={pagination && pagination?.pageCount || 1}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       </div>
     </div>
   );
-}
+} 

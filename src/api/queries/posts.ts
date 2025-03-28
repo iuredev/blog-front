@@ -1,17 +1,17 @@
 import axios from "axios";
 import { DataFromApi, Post } from "../../types";
 
-const VITE_API_KEY = import.meta.env.VITE_API_KEY;
-const VITE_API_URL = import.meta.env.VITE_API_URL;
+const NEXT_API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+const NEXT_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const getPosts = async (pageSize: number, page?: number) => {
   const response = await axios.get(
-    `${VITE_API_URL}/articles?pagination[page]=${
+    `${NEXT_API_URL}/articles?pagination[page]=${
       page || 1
     }&pagination[pageSize]=${pageSize}&populate=*&sort=createdAt:desc`,
     {
       headers: {
-        Authorization: `Bearer ${VITE_API_KEY}`,
+        Authorization: `Bearer ${NEXT_API_KEY}`,
       },
     }
   );
@@ -21,10 +21,10 @@ export const getPosts = async (pageSize: number, page?: number) => {
 
 export const getPostBySlug = async (slug: string) => {
   const response = await axios.get(
-    `${VITE_API_URL}/articles?filters[slug][$eq]=${slug}&populate=*`,
+    `${NEXT_API_URL}/articles?filters[slug][$eq]=${slug}&populate=*`,
     {
       headers: {
-        Authorization: `Bearer ${VITE_API_KEY}`,
+        Authorization: `Bearer ${NEXT_API_KEY}`,
       },
     }
   );

@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import Link from "next/link";
 
 export default function Error() {
   return (
@@ -12,7 +12,7 @@ export default function Error() {
       </p>
 
       <Link
-        to="/"
+        href="/"
         className="mt-6 inline-block px-6 py-3 text-white font-semibold rounded-md"
       >
         Go Home

@@ -4,9 +4,10 @@ export interface Post {
   id: number;
   documentId: string;
   title: string;
+  createdAt: string;
+  updatedAt: string;
   description: string;
   content: string;
-  created_at: string;
   slug: string;
   locale?: string;
   publishedAt: string;

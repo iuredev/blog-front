@@ -12,7 +12,7 @@ export const useGetPage = (page: PageType) => {
   });
 
   return {
-    data: data?.data,
+    data,
     isLoading,
     isFetching,
     isError,

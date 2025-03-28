@@ -1,9 +1,12 @@
-import { Link } from "react-router";
-import { useHelmet } from "../../hooks";
+import Link from "next/link";
+import { Metadata } from "next";
 
-export default function NotFoundPage() {
-  useHelmet("404", "Page Not Found");
+export const metadata: Metadata = {
+  title: "404 - Page Not Found | Iure",
+  description: "The page you are looking for does not exist.",
+};
 
+export default function NotFound() {
   return (
     <div className="flex items-center justify-center h-full">
       <div className="text-center">
@@ -14,10 +17,10 @@ export default function NotFoundPage() {
           Page Not Found
         </p>
         <p className="text-gray-500 mt-2">
-          Sorry, the page you are looking for does not exist.
+          The page you are looking for does not exist. It might have been moved, deleted, or never existed.
         </p>
         <Link
-          to="/"
+          href="/"
           className="mt-6 inline-block px-6 py-3 text-white font-semibold rounded-md"
         >
           Go Home
@@ -25,4 +28,4 @@ export default function NotFoundPage() {
       </div>
     </div>
   );
-}
+} 

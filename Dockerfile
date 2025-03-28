@@ -1,26 +1,24 @@
-# Etapa de build
-FROM node:22-alpine AS build_image
+FROM node:22-alpine AS builder
 WORKDIR /app
-COPY package*.json .
+
+COPY package*.json ./
 RUN npm install
+
 COPY . .
+
 RUN npm run build
 
-FROM node:22-alpine AS production_image
+FROM node:22-alpine AS runner
 WORKDIR /app
 
-FROM nginx:alpine
-COPY --from=build_image /app/dist/ /usr/share/nginx/html
-COPY package.json vite.config.ts ./
+COPY --from=builder /app/next.config.ts ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
 
-RUN echo 'server { \
-  listen 80; \
-  root /usr/share/nginx/html; \
-  index index.html; \
-  location / { \
-  try_files $uri $uri/ /index.html; \
-  } \
-  }' > /etc/nginx/conf.d/default.conf
+ENV NODE_ENV=production
+ENV PORT=3000
+EXPOSE ${PORT}
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "start"]

@@ -1,23 +1,27 @@
 import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
-import { Link } from "react-router";
+import Link from "next/link";
+import Image from "next/image";
 
 const Profile = () => {
   return (
-    <div className="dark:bg-gray-900 py-4">
+    <div className="bg-gray-50 dark:bg-gray-900 py-4">
       <div className="gap-2 md:gap-8 max-w-4xl mx-auto text-center flex flex-col md:flex-row items-center md:items-start">
-        <div className="max-h-142 w-52 h-52 md:w-132 md:h-132 profile-image ">
-          <img
-            src="iure.jpg"
+        <div className="max-h-142 w-52 h-52 md:w-132 md:h-132 profile-image">
+          <Image
+            width={132}
+            height={132}
+            src="/iure.jpg"
             alt="Iure Gomes"
-            className=" object-contain object-center rounded-full "
+            className="object-contain object-center rounded-full"
           />
         </div>
 
         <div className="md:text-left">
-          <h1 className="text-3xl font-semibold md:text-2xl mt-4 md:mt-0 text-gray-200">
-            <Link to="/about" className="text-gray-400">
-              Yo, I'm Iure
-            </Link>, a software engineer messing with lines of code to make things work.
+          <h1 className="text-3xl font-semibold md:text-2xl mt-4 md:mt-0 text-gray-800 dark:text-gray-300">
+            <Link href="/about" className="text-gray-700 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200">
+              Yo, I&apos;m Iure
+            </Link>
+            <span className="text-gray-800 dark:text-gray-300">, a software engineer messing with lines of code to make things work.</span>
           </h1>
 
           <div className="flex justify-center md:justify-start space-x-6 mt-6 text-sm">
@@ -26,30 +30,36 @@ const Profile = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="flex items-center space-x-2 *:hover:text-pink-500 *:transition *:duration-300"
+              className="group flex items-center space-x-2"
             >
-              <FaInstagram className="h-6 w-6 text-gray-300 " />
-              <span className="hidden md:inline text-gray-300">Instagram</span>
+              <FaInstagram className="h-6 w-6 text-gray-300 group-hover:text-pink-500 transition duration-300" />
+              <span className="hidden md:inline text-gray-300 group-hover:text-pink-500 transition duration-300">
+                Instagram
+              </span>
             </a>
             <a
               href="https://linkedin.com/in/iure-silva"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="flex items-center space-x-2 *:hover:text-blue-700  *:transition *:duration-300"
+              className="group flex items-center space-x-2"
             >
-              <FaLinkedin className="h-6 w-6 text-gray-300" />
-              <span className="hidden md:inline text-gray-300">LinkedIn</span>
+              <FaLinkedin className="h-6 w-6 text-gray-300 group-hover:text-blue-500 transition duration-300" />
+              <span className="hidden md:inline text-gray-300 group-hover:text-blue-500 transition duration-300">
+                LinkedIn
+              </span>
             </a>
             <a
               href="https://github.com/iuredev"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              className="flex items-center space-x-2 *:hover:text-gray-500 *:transition *:duration-300"
+              className="group flex items-center space-x-2"
             >
-              <FaGithub className="h-6 w-6 text-gray-300" />
-              <span className="hidden md:inline text-gray-300">GitHub</span>
+              <FaGithub className="h-6 w-6 text-gray-300 group-hover:text-gray-500 transition duration-300" />
+              <span className="hidden md:inline text-gray-300 group-hover:text-gray-500 transition duration-300">
+                GitHub
+              </span>
             </a>
           </div>
         </div>

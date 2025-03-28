@@ -1,11 +1,11 @@
 import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
-import { Link } from "react-router";
+import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="dark:bg-gray-900 dartext-gray-300 sm:py-2 md:py-4">
+    <footer className="dartext-gray-300 sm:py-2 md:py-4">
       <div className="max-w-7xl mx-auto flex justify-between align-middle">
-        <p className="text-sm"><Link to="/">© Iure Gomes</Link></p>
+        <p className="text-sm"><Link href="/">© Iure Gomes</Link></p>
 
         <div className="flex space-x-6">
           <a

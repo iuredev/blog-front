@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import ReactMarkdown, { Components } from "react-markdown";
-
-import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
+
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import "./style.css";
@@ -11,7 +11,7 @@ interface MarkdownRendererProps {
 }
 
 export default function Markdown({ content }: MarkdownRendererProps) {
-  type MarkdownPayload = any;
+  type MarkdownPayload = any; // workaround
 
   const renderers: Components = {
     code: ({ className, children, ...props }: MarkdownPayload) => {
@@ -54,12 +54,11 @@ export default function Markdown({ content }: MarkdownRendererProps) {
   };
 
   return (
-    <div >
+    <div className="markdown">
       <ReactMarkdown
         rehypePlugins={[rehypeRaw]}
         remarkPlugins={[remarkGfm]}
         components={renderers}
-        className="markdown"
       >
         {content}
       </ReactMarkdown>
