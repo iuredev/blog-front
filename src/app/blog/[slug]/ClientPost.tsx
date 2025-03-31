@@ -16,6 +16,7 @@ export default function ClientPost({ slug }: { slug: string }) {
         "@type": "BlogPosting",
         headline: data.title,
         datePublished: data.publishedAt,
+        dateCreated: data.createdAt,
         dateModified: data.updatedAt || data.publishedAt,
         author: {
           "@type": "Person",
@@ -44,7 +45,7 @@ export default function ClientPost({ slug }: { slug: string }) {
         <div className="flex flex-col">
           <h1 className="text-4xl font-bold">{data?.title}</h1>
           <p className="flex items-center gap-2 text-gray-400">
-            {formatDate(data.publishedAt)} •{" "}
+            {formatDate(data.createdAt)} •{" "}
             {data.category && `${data.category.name} •`}
             {minutesToRead(data.content)}
           </p>
