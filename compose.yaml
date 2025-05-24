@@ -13,6 +13,7 @@ services:
       - blog
     expose:
       - ${PORT}
+    restart: always
 networks:
   blog:
     name: blog
