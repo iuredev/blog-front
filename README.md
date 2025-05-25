@@ -1,36 +1,145 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Iure.dev - Personal Blog
 
-## Getting Started
+A modern, performant personal blog built with React, Vite, and Strapi CMS. This project features server-side rendering (SSR) for optimal SEO and performance.
 
-First, run the development server:
+## 🚀 Features
+
+- ⚡️ Built with Vite for lightning-fast development and build times
+- 🔍 SEO optimized with server-side rendering
+- 📱 Fully responsive design
+- 🎨 Modern UI with Tailwind CSS
+- 📝 Markdown support with syntax highlighting
+- 🔄 Real-time updates
+- 📊 Google Analytics integration
+- 🔍 Sitemap generation
+- 🐳 Docker support for easy deployment
+
+## 🛠️ Tech Stack
+
+- **Frontend:**
+
+  - React
+  - Vite
+  - TypeScript
+  - Tailwind CSS
+  - React Markdown
+  - React Syntax Highlighter
+
+- **Backend:**
+  - Strapi CMS
+  - Node.js
+  - Express
+
+## 🏗️ Project Structure
+
+```
+blog-front/
+├── src/
+│   ├── components/     # React components
+│   ├── pages/         # Page components
+│   ├── routes/        # Route definitions
+│   ├── hooks/         # Custom React hooks
+│   ├── utils/         # Utility functions
+│   └── types/         # TypeScript type definitions
+├── public/            # Static assets
+├── dist/             # Build output
+└── scripts/          # Build and utility scripts
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+- Docker (optional)
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/blog-with-strapi.git
+   cd blog-front
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file based on `.env.example`:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+4. Update the environment variables in `.env` with your configuration.
+
+### Development
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at `http://localhost:5174`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Building for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+### Running in Production
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🐳 Docker Support
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Build and run with Docker:
 
-## Deploy on Vercel
+```bash
+docker build -t blog-front .
+docker run -p 3000:3000 blog-front
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Or use Docker Compose:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+docker-compose up
+```
+
+## 📝 Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```env
+VITE_PORT=5174
+VITE_GOOGLE_ANALYTICS_ID=your-ga-id
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👨‍💻 Author
+
+- **Iure Silva** - [GitHub](https://github.com/iure)
+- **Website** - [iure.dev](https://iure.dev)
+- **LinkedIn** - [iure-silva](https://linkedin.com/in/iure-silva)
+
+## 🙏 Acknowledgments
+
+- [Vite](https://vitejs.dev/)
+- [React](https://reactjs.org/)
+- [Strapi](https://strapi.io/)
+- [Tailwind CSS](https://tailwindcss.com/)
