@@ -1,21 +1,24 @@
 services:
-  next_app:
-    build: .
-    ports:
-      - "${PORT}:${PORT}"
-    environment:
-      - PORT=${PORT}
-      - NEXT_PUBLIC_API_KEY=${NEXT_PUBLIC_API_KEY}
-      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
-    env_file:
-      - .env
-    networks:
-      - blog
-    expose:
-      - ${PORT}
-    restart: always
+    next_app:
+        build:
+            context: .
+            args:
+                - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+                - NEXT_PUBLIC_API_KEY=${NEXT_PUBLIC_API_KEY}
+        ports:
+            - "${PORT}:${PORT}"
+        environment:
+            - PORT=${PORT}
+            - NEXT_PUBLIC_API_KEY=${NEXT_PUBLIC_API_KEY}
+            - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+        env_file:
+            - .env
+        networks:
+            - blog
+        expose:
+            - ${PORT}
+        restart: always
 networks:
-  blog:
-    name: blog
-    driver: bridge
-    external: true
+    blog:
+        name: blog
+        driver: bridge

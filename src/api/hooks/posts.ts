@@ -12,7 +12,7 @@ export const useGetPosts = (pageSize: number = 10, page?: number) => {
   });
 
   return {
-    posts: data && data?.data,
+    posts: data?.data,
     isLoading,
     isFetching,
     isError,
@@ -37,8 +37,8 @@ export const useGetPostsPaginated = (pageSize: number = 10, page: number) => {
   });
 
   return {
-    posts: data && data?.data,
-    pagination: data && data?.meta?.pagination,
+    posts: data?.data,
+    pagination: data?.meta?.pagination,
     isLoading,
     isFetching,
     isError,

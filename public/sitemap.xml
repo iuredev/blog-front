@@ -26,27 +26,33 @@
     
   </url>
   <url>
-    <loc>https://iure.dev/blog/teste</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2025-03-15T16:20:07.062Z</lastmod>
-  </url>
-  <url>
-    <loc>https://iure.dev/blog/title</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2025-03-15T16:32:11.400Z</lastmod>
-  </url>
-  <url>
     <loc>https://iure.dev/blog/graph-ql-vs-rest-api-key-differences-and-when-to-use-each</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2025-03-24T18:55:11.698Z</lastmod>
+    <lastmod>2025-03-24T19:15:46.919Z</lastmod>
   </url>
   <url>
-    <loc>https://iure.dev/blog/let-s-talk-self-hosting-your-own-digital-playground</loc>
+    <loc>https://iure.dev/blog/proxmox-community-scripts-effortless-vm-and-lxc-setup</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2025-03-24T18:56:50.516Z</lastmod>
+    <lastmod>2025-05-26T17:31:36.162Z</lastmod>
+  </url>
+  <url>
+    <loc>https://iure.dev/blog/self-hosting-your-own-digital-playground</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2025-04-14T14:46:32.307Z</lastmod>
+  </url>
+  <url>
+    <loc>https://iure.dev/blog/over-engineering-when-the-solution-is-more-complex-than-the-problem</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2025-06-22T16:24:30.134Z</lastmod>
+  </url>
+  <url>
+    <loc>https://iure.dev/blog/exploring-rust-through-a-real-authentication-project</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2025-08-18T13:46:14.602Z</lastmod>
   </url>
 </urlset>
