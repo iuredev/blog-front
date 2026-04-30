@@ -14,11 +14,12 @@ services:
         env_file:
             - .env
         networks:
-            - blog
+            - blog-prod
         expose:
             - ${PORT}
         restart: always
 networks:
-    blog:
-        name: blog
+    blog-prod:
+        name: blog-prod
         driver: bridge
+        external: true
