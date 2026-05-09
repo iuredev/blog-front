@@ -6,6 +6,9 @@ interface Keys {
   POST_BY_SLUG: string;
   POSTS_PAGINATED: string;
   PAGES: string;
+  PROJECTS: string;
+  GLOBAL: string;
+  REACTIONS: string;
 }
 
 export const keys: Record<keyof Keys, string> = {
@@ -16,4 +19,7 @@ export const keys: Record<keyof Keys, string> = {
   POSTS_BY_CATEGORY: "articles_by_category",
   POSTS_RELATED: "articles_related",
   PAGES: "pages",
+  PROJECTS: "projects",
+  GLOBAL: "global",
+  REACTIONS: "reactions",
 };
