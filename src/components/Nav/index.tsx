@@ -31,6 +31,7 @@ const Nav = () => {
     { href: "/about", label: "About" },
     { href: "/manual", label: "Manual" },
     { href: "/blog", label: "Blog" },
+    { href: "/projects", label: "Projects" },
   ];
 
   return (

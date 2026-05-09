@@ -15,7 +15,19 @@ export default function PostLink({ post, preview }: PostProps) {
       </div>
       <span className="text-gray-300 text-base">
         {formatDate(post.createdAt)} •{" "}
-        {post.category && `${post.category.name} •`}{" "}
+        {post.categories?.length > 0 && (
+          <>
+            <span className="relative inline-block group">
+              <span className="cursor-default">{post.categories[0].name}</span>
+              {post.categories.length > 1 && (
+                <span className="absolute bottom-full left-0 mb-1 opacity-0 group-hover:opacity-100 bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap z-10 pointer-events-none transition-opacity">
+                  {post.categories.slice(1).map((c) => c.name).join(", ")}
+                </span>
+              )}
+            </span>
+            {" •"}{" "}
+          </>
+        )}
         {minutesToRead(post.content)}
       </span>
 
