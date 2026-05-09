@@ -1,13 +1,19 @@
 "use client";
 
 import { useGetPostBySlug, useGetRandomPosts } from "@/api/hooks";
-import { Error, Loading, Markdown, PostLink } from "@/components";
+import { Error, Loading, Markdown, PostLink, Reactions } from "@/components";
 import ShareSocialMedia from "@/components/ShareSocialMedia";
 import { formatDate, minutesToRead } from "@/utils";
+import { Post } from "@/types";
 import Script from "next/script";
 
-export default function ClientPost({ slug }: { slug: string }) {
-  const { data, isLoading, isError } = useGetPostBySlug(slug);
+interface ClientPostProps {
+  slug: string;
+  initialData?: Post;
+}
+
+export default function ClientPost({ slug, initialData }: ClientPostProps) {
+  const { data, isLoading, isError } = useGetPostBySlug(slug, initialData);
   const { posts } = useGetRandomPosts(!isLoading ? data?.id : undefined);
 
   const jsonLd = data
@@ -27,34 +33,28 @@ export default function ClientPost({ slug }: { slug: string }) {
           "@id": `https://iure.dev/blog/${slug}`,
         },
         description: data.content.substring(0, 160),
-        articleSection: data.category?.name || "Blog",
+        articleSection: data.categories?.[0]?.name || "Blog",
       }
     : null;
 
   const render = () => {
-    if (isLoading) {
-      return <Loading />;
-    }
-
-    if (isError) {
-      return <Error />;
-    }
+    if (isLoading) return <Loading />;
+    if (isError) return <Error />;
 
     if (data) {
       return (
         <div className="flex flex-col">
-          <h1 className="text-4xl font-bold">{data?.title}</h1>
+          <h1 className="text-4xl font-bold">{data.title}</h1>
           <p className="flex items-center gap-2 text-gray-400">
             {formatDate(data.createdAt)} •{" "}
-            {data.category && `${data.category.name} •`}
+            {data.categories?.length > 0 && `${data.categories[0].name} •`}
             {minutesToRead(data.content)}
           </p>
-          <ShareSocialMedia
-            url={`${window.location.origin}/blog/${data.slug}`}
-          />
+          <ShareSocialMedia url={`${window.location.origin}/blog/${data.slug}`} />
           <div className="content grid grid-cols-1 mt-6 text-base md:text-[1.05rem]">
             <Markdown content={data.content} />
           </div>
+          <Reactions articleDocumentId={data.documentId} />
         </div>
       );
     }

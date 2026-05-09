@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import ClientPost from './ClientPost';
 import { getPostBySlug } from '@/api/queries/posts';
 
@@ -35,5 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function Post({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  return <ClientPost slug={slug} />;
+  const post = await getPostBySlug(slug);
+  if (!post) notFound();
+  return <ClientPost slug={slug} initialData={post} />;
 }
