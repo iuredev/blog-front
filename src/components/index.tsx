@@ -7,3 +7,5 @@ export { default as Pagination } from "./Pagination";
 export { default as PostLink } from "./PostLink";
 export { default as Error } from "./Error";
 export { default as ThemeToggle } from "./ThemeToggle";
+export { default as ProjectCard } from "./ProjectCard";
+export { default as Reactions } from "./Reactions";
