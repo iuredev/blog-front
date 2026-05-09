@@ -1,5 +1,6 @@
 'use client'
 
+import React from "react";
 import { useGetPostsPaginated } from "@/api/hooks";
 import { useGetCategories } from "@/api/hooks/categories";
 import { PostLink, Error, Loading, Pagination } from "@/components";
@@ -37,7 +38,8 @@ export default function ClientBlog() {
     updateParams(id, 1);
   };
 
-  const handlePageChange = (page: number) => {
+  const handlePageChange: React.Dispatch<React.SetStateAction<number>> = (value) => {
+    const page = typeof value === "function" ? value(currentPage) : value;
     updateParams(selectedCategory, page);
   };
 
