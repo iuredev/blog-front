@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 import ClientBlog from './ClientBlog';
+import { Loading } from '@/components';
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -18,5 +20,9 @@ export const metadata: Metadata = {
 };
 
 export default function Blog() {
-  return <ClientBlog />;
+  return (
+    <Suspense fallback={<Loading />}>
+      <ClientBlog />
+    </Suspense>
+  );
 } 
