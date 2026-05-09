@@ -19,18 +19,19 @@ export const useGetPosts = (pageSize: number = 10, page?: number) => {
   };
 };
 
-export const useGetPostBySlug = (slug: string) => {
+export const useGetPostBySlug = (slug: string, initialData?: Post) => {
   return useQuery({
     queryKey: [keys.POST_BY_SLUG, slug],
     queryFn: () => getPostBySlug(slug),
+    initialData,
     ...defaultOptionsReactQuery,
   });
 };
 
-export const useGetPostsPaginated = (pageSize: number = 10, page: number) => {
+export const useGetPostsPaginated = (pageSize: number = 10, page: number, categoryId?: number) => {
   const { data, isLoading, isFetching, isError } = useQuery({
-    queryKey: [keys.POSTS_PAGINATED, page],
-    queryFn: () => getPosts(pageSize, page),
+    queryKey: [keys.POSTS_PAGINATED, page, categoryId],
+    queryFn: () => getPosts(pageSize, page, categoryId),
     notifyOnChangeProps: ["data"],
     placeholderData: keepPreviousData,
     ...defaultOptionsReactQuery,
@@ -49,7 +50,7 @@ export const useGetPostsPaginated = (pageSize: number = 10, page: number) => {
 export const useGetRandomPosts = (currentPostId?: number) => {
   const { data, isLoading, isFetching, isError } = useQuery({
     queryKey: [keys.POSTS_RELATED],
-    queryFn: () => getPosts(1000),
+    queryFn: () => getPosts(50),
     ...defaultOptionsReactQuery,
   });
 
