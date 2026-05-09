@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import { Footer } from "@/components";
 import { ReactQueryProvider, ThemeProvider } from "./providers";
 import Script from "next/script";
+import { getGlobal, getStrapiMediaUrl } from "@/api/queries/global";
 
 const InterSans = Inter({
   variable: "--font-inter-sans",
@@ -16,34 +17,37 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Iure | Software Engineer",
-  description: "Personal blog and portfolio of Iure, a software engineer sharing insights on web development, programming and technology.",
-  metadataBase: new URL('https://iure.dev'),
-  alternates: {
-    canonical: '/',
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: 'https://iure.dev',
-    title: 'Iure | Software Engineer',
-    description: 'Personal blog and portfolio of Iure, a software engineer sharing insights on web development, programming and technology.',
-    siteName: 'Iure ',
+const title = "Iure | Software Engineer";
+const description = "Personal blog and portfolio of Iure, a software engineer sharing insights on web development, programming and technology.";
 
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Iure | Software Engineer',
-    description: 'Personal blog and portfolio of Iure, a software engineer sharing insights on web development, programming and technology.',
+export async function generateMetadata(): Promise<Metadata> {
+  const global = await getGlobal();
 
-  },
-};
+  const ogImageUrl = getStrapiMediaUrl(global?.ogImage?.url);
 
+  return {
+    title,
+    description,
+    metadataBase: new URL("https://iure.dev"),
+    alternates: { canonical: "/" },
+    robots: { index: true, follow: true },
+    openGraph: {
+      type: "website",
+      locale: "en_US",
+      url: "https://iure.dev",
+      title,
+      description,
+      siteName: "Iure",
+      ...(ogImageUrl && { images: [{ url: ogImageUrl }] }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      ...(ogImageUrl && { images: [ogImageUrl] }),
+    },
+  };
+}
 
 export default function RootLayout({
   children,
@@ -56,8 +60,8 @@ export default function RootLayout({
         <meta name="color-scheme" content="light dark" />
       </head>
       <body
-        className={`${InterSans.variable} ${geistMono.variable} antialiased 
-          bg-white dark:bg-gray-900 
+        className={`${InterSans.variable} ${geistMono.variable} antialiased
+          bg-white dark:bg-gray-900
           text-gray-900 dark:text-gray-300`}
       >
         <ReactQueryProvider>
