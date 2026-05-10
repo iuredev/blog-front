@@ -44,7 +44,7 @@ export default function ClientPost({ slug, initialData }: ClientPostProps) {
     if (data) {
       return (
         <div className="flex flex-col">
-          <h1 className="text-4xl font-bold">{data.title}</h1>
+          <h1 className="text-2xl sm:text-4xl font-bold">{data.title}</h1>
           <p className="flex items-center gap-2 text-gray-400">
             {formatDate(data.createdAt)} •{" "}
             {data.categories?.length > 0 && `${data.categories[0].name} •`}

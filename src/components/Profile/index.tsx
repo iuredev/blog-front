@@ -15,13 +15,13 @@ const Profile = () => {
     return (
         <div className="bg-gray-50 dark:bg-gray-900 py-4">
             <div className="gap-2 md:gap-8 max-w-4xl mx-auto text-center flex flex-col md:flex-row items-center md:items-start">
-                <div className="max-h-142 w-52 h-52 md:w-132 md:h-132 profile-image">
+                <div className="w-36 h-36 sm:w-44 sm:h-44 shrink-0 profile-image">
                     <Image
-                        width={132}
-                        height={132}
+                        width={176}
+                        height={176}
                         src={photoUrl}
                         alt={photoAlt}
-                        className="object-contain object-center rounded-full"
+                        className="w-full h-full object-cover rounded-full"
                     />
                 </div>
 

@@ -53,6 +53,11 @@
     }
   }
 
+  pre {
+    overflow-x: auto;
+    max-width: 100%;
+  }
+
   code {
     color: #f8f9fa;
     background-color: #343a40;

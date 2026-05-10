@@ -23,6 +23,8 @@ export default function Markdown({ content }: MarkdownRendererProps) {
         borderRadius: "5px",
         fontFamily: "monospace",
         fontSize: "14px",
+        overflowX: "auto",
+        maxWidth: "100%",
       };
 
       if (!language) {
@@ -45,6 +47,9 @@ export default function Markdown({ content }: MarkdownRendererProps) {
         </SyntaxHighlighter>
       );
     },
+    pre: ({ children }: MarkdownPayload) => (
+      <pre style={{ overflowX: "auto", maxWidth: "100%" }}>{children}</pre>
+    ),
     ul: ({ children }: MarkdownPayload) => (
       <ul className="list-disc">{children}</ul>
     ),

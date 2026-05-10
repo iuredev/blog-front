@@ -23,7 +23,7 @@ export default function Reactions({ articleDocumentId }: ReactionsProps) {
   if (isLoading) return null;
 
   return (
-    <div className="flex gap-3 mt-8">
+    <div className="flex flex-wrap gap-2 mt-8">
       {[...REACTIONS].sort((a, b) => counts[b.type] - counts[a.type]).map(({ type, emoji, label }) => {
         const active = userReactions.includes(type);
         return (
