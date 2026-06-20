@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 import ClientProjects from './ClientProjects';
+import { Loading } from '@/components';
 
 export const metadata: Metadata = {
   title: 'Projects | Iure',
@@ -18,5 +20,9 @@ export const metadata: Metadata = {
 };
 
 export default function Projects() {
-  return <ClientProjects />;
+  return (
+    <Suspense fallback={<Loading />}>
+      <ClientProjects />
+    </Suspense>
+  );
 }

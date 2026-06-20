@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 import ClientManual from './ClientManual';
 import { getPage } from '@/api/queries/pages';
+import { Loading } from '@/components';
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPage('manual');
@@ -30,5 +32,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function Manual() {
-  return <ClientManual />;
+  return (
+    <Suspense fallback={<Loading />}>
+      <ClientManual />
+    </Suspense>
+  );
 }

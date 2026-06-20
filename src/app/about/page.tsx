@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 import ClientAbout from './ClientAbout';
 import { getPage } from '@/api/queries/pages';
+import { Loading } from '@/components';
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPage('about');
@@ -30,5 +32,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function About() {
-  return <ClientAbout />;
+  return (
+    <Suspense fallback={<Loading />}>
+      <ClientAbout />
+    </Suspense>
+  );
 }
