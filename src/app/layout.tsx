@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import { Footer } from "@/components";
@@ -70,13 +71,17 @@ export default function RootLayout({
               className="grid min-h-screen grid-rows-[auto_1fr_auto] mx-auto max-w-[47.5rem] text-[1.1rem] leading-[34px] tracking-[0.9px]"
             >
               <header className="px-6 md:px-0">
-                <Nav />
+                <Suspense>
+                  <Nav />
+                </Suspense>
               </header>
               <main className="container flex-grow mb-5 px-6 md:px-0 pt-14 pb-4">
                 {children}
               </main>
               <footer className="p-6 md:p-0 md:py-2">
-                <Footer />
+                <Suspense>
+                  <Footer />
+                </Suspense>
               </footer>
             </div>
           </ThemeProvider>
