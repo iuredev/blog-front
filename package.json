@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack -p $PORT",
-    "build": "node --experimental-modules scripts/generate-sitemap.mjs && tsc -b && next build",
+    "build": "node --experimental-modules scripts/generate-sitemap.mjs && rm -rf .next && tsc -b && next build",
     "start": "next start -p $PORT",
     "lint": "next lint"
   },
