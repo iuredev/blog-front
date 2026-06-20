@@ -6,6 +6,7 @@ import ShareSocialMedia from "@/components/ShareSocialMedia";
 import { formatDate, minutesToRead } from "@/utils";
 import { Post } from "@/types";
 import Script from "next/script";
+import { useLocale } from "@/hooks/useLocale";
 
 interface ClientPostProps {
   slug: string;
@@ -13,8 +14,9 @@ interface ClientPostProps {
 }
 
 export default function ClientPost({ slug, initialData }: ClientPostProps) {
-  const { data, isLoading, isError } = useGetPostBySlug(slug, initialData);
-  const { posts } = useGetRandomPosts(!isLoading ? data?.id : undefined);
+  const { t, strapiLocale } = useLocale();
+  const { data, isLoading, isError } = useGetPostBySlug(slug, initialData, strapiLocale);
+  const { posts } = useGetRandomPosts(!isLoading ? data?.id : undefined, strapiLocale);
 
   const jsonLd = data
     ? {
@@ -30,10 +32,10 @@ export default function ClientPost({ slug, initialData }: ClientPostProps) {
         },
         mainEntityOfPage: {
           "@type": "WebPage",
-          "@id": `https://iure.dev/blog/${slug}`,
+          "@id": `https://iure.dev/notes/${slug}`,
         },
         description: data.content.substring(0, 160),
-        articleSection: data.categories?.[0]?.name || "Blog",
+        articleSection: data.categories?.[0]?.name || "Notes",
       }
     : null;
 
@@ -50,7 +52,7 @@ export default function ClientPost({ slug, initialData }: ClientPostProps) {
             {data.categories?.length > 0 && `${data.categories[0].name} •`}
             {minutesToRead(data.content)}
           </p>
-          <ShareSocialMedia url={`${window.location.origin}/blog/${data.slug}`} />
+          <ShareSocialMedia url={`${window.location.origin}/notes/${data.slug}`} />
           <div className="content grid grid-cols-1 mt-6 text-base md:text-[1.05rem]">
             <Markdown content={data.content} />
           </div>
@@ -76,7 +78,7 @@ export default function ClientPost({ slug, initialData }: ClientPostProps) {
 
       {!isLoading && !isError && (
         <div className="mt-16">
-          <h2 className="text-2xl font-bold">Other posts</h2>
+          <h2 className="text-2xl font-bold">{t("notes.otherPosts")}</h2>
           {posts.length > 0 &&
             posts.map((post) => (
               <PostLink key={post.id} post={post} preview={false} />

@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt || post.publishedAt,
       authors: ['Iure'],
-      url: `https://iure.dev/blog/${post.slug}`,
+      url: `https://iure.dev/notes/${post.slug}`,
     },
     twitter: {
       card: 'summary_large_image',

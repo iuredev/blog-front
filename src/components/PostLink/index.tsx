@@ -1,17 +1,22 @@
+"use client";
+
 import Link from "next/link";
 import { Post } from "../../types";
 import { formatDate, minutesToRead } from "../../utils";
 import Markdown from "../Markdown";
+import { useLocale } from "@/hooks/useLocale";
 
 interface PostProps {
   post: Post;
   preview: boolean;
 }
 export default function PostLink({ post, preview }: PostProps) {
+  const { localizeHref } = useLocale();
+
   return (
     <div key={post.id} className="my-4 gap-16 width-full">
       <div className="text-xl font-semibold block">
-        <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+        <Link href={localizeHref(`/notes/${post.slug}`)}>{post.title}</Link>
       </div>
       <span className="text-gray-300 text-base">
         {formatDate(post.createdAt)} •{" "}

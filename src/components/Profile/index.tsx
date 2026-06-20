@@ -5,24 +5,30 @@ import Link from "next/link";
 import Image from "next/image";
 import { useGetGlobal } from "@/api/hooks/global";
 import { getStrapiMediaUrl } from "@/api/queries/global";
+import { useLocale } from "@/hooks/useLocale";
 
 const Profile = () => {
-    const { data: global } = useGetGlobal();
+    const { data: global, isLoading } = useGetGlobal();
+    const { t } = useLocale();
 
-    const photoUrl = getStrapiMediaUrl(global?.photo?.url) ?? "/iure.png";
+    const photoUrl = getStrapiMediaUrl(global?.photo?.url);
     const photoAlt = global?.photo?.alternativeText ?? "Iure Gomes";
 
     return (
         <div className="bg-gray-50 dark:bg-gray-900 py-4">
             <div className="gap-2 md:gap-8 max-w-4xl mx-auto text-center flex flex-col md:flex-row items-center md:items-start">
                 <div className="w-36 h-36 sm:w-44 sm:h-44 shrink-0 profile-image">
-                    <Image
-                        width={176}
-                        height={176}
-                        src={photoUrl}
-                        alt={photoAlt}
-                        className="w-full h-full object-cover rounded-full"
-                    />
+                    {isLoading || !photoUrl ? (
+                        <div className="w-full h-full rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse" />
+                    ) : (
+                        <Image
+                            width={176}
+                            height={176}
+                            src={photoUrl}
+                            alt={photoAlt}
+                            className="w-full h-full object-cover rounded-full"
+                        />
+                    )}
                 </div>
 
                 <div className="md:text-left">
@@ -31,11 +37,10 @@ const Profile = () => {
                             href="/about"
                             className="text-gray-700 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
                         >
-                            Yo, I&apos;m Iure
+                            {t("profile.greeting")}
                         </Link>
                         <span className="text-gray-800 dark:text-gray-300">
-                            , a software engineer messing with lines of code to
-                            make things work.
+                            {t("profile.bio")}
                         </span>
                     </h1>
 

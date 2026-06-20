@@ -7,12 +7,14 @@ import { PostLink, Error, Loading, Pagination } from "@/components";
 import { Post } from "@/types";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useLocale } from "@/hooks/useLocale";
 
 const VISIBLE_COUNT = 5;
 
-export default function ClientBlog() {
+export default function ClientNotes() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { t, strapiLocale } = useLocale();
 
   const categoryParam = searchParams.get("category");
   const pageParam = searchParams.get("page");
@@ -21,7 +23,7 @@ export default function ClientBlog() {
 
   const [showAll, setShowAll] = useState(false);
 
-  const { posts = [], pagination, isLoading, isError } = useGetPostsPaginated(10, currentPage, selectedCategory);
+  const { posts = [], pagination, isLoading, isError } = useGetPostsPaginated(10, currentPage, selectedCategory, strapiLocale);
   const { categories } = useGetCategories();
 
   const visibleCategories = showAll ? categories : categories.slice(0, VISIBLE_COUNT);
@@ -31,6 +33,8 @@ export default function ClientBlog() {
     const params = new URLSearchParams();
     if (categoryId !== undefined) params.set("category", String(categoryId));
     if (page > 1) params.set("page", String(page));
+    const lang = searchParams.get("lang");
+    if (lang) params.set("lang", lang);
     router.push(`?${params.toString()}`, { scroll: false });
   };
 
@@ -53,7 +57,7 @@ export default function ClientBlog() {
   const render = () => {
     if (isLoading) return <Loading />;
     if (isError) return <Error />;
-    if (posts.length === 0) return <div>No posts found</div>;
+    if (posts.length === 0) return <div>{t("notes.noPostsFound")}</div>;
 
     return posts.map((post: Post) => (
       <PostLink key={post.id} post={post} preview={false} />
@@ -63,14 +67,14 @@ export default function ClientBlog() {
   return (
     <div>
       <div>
-        <h1 className="text-4xl font-bold">Blog</h1>
-        <p className="text-gray-400">This is where I write about things that interest me. Enjoy reading it! 🙂</p>
+        <h1 className="text-4xl font-bold">{t("nav.notes")}</h1>
+        <p className="text-gray-400">{t("notes.description")}</p>
       </div>
 
       {categories.length > 0 && (
         <div className="flex flex-wrap gap-2 mt-6">
           <button onClick={() => handleCategoryClick(undefined)} className={pillClass(selectedCategory === undefined)}>
-            All
+            {t("notes.filterAll")}
           </button>
           {visibleCategories.map((cat) => (
             <button key={cat.id} onClick={() => handleCategoryClick(cat.id)} className={pillClass(selectedCategory === cat.id)}>
@@ -79,7 +83,7 @@ export default function ClientBlog() {
           ))}
           {hasMore && (
             <button onClick={() => setShowAll((v) => !v)} className={pillClass(false)}>
-              {showAll ? "less" : `+${categories.length - VISIBLE_COUNT} more`}
+              {showAll ? t("notes.showLess") : `+${categories.length - VISIBLE_COUNT} ${t("notes.showMore")}`}
             </button>
           )}
         </div>

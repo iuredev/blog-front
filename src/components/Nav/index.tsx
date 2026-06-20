@@ -1,12 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useLocale } from "@/hooks/useLocale";
 // import { ThemeToggle } from "@/components";
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { locale, t, setLocale, localizeHref } = useLocale();
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -27,11 +28,10 @@ const Nav = () => {
   };
 
   const menuItems = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/manual", label: "Manual" },
-    { href: "/blog", label: "Blog" },
-    { href: "/projects", label: "Projects" },
+    { href: localizeHref("/"), label: t("nav.home") },
+    { href: localizeHref("/about"), label: t("nav.about") },
+    { href: localizeHref("/projects"), label: t("nav.projects") },
+    { href: localizeHref("/notes"), label: t("nav.notes") },
   ];
 
   return (
@@ -40,7 +40,7 @@ const Nav = () => {
         <div className="flex justify-between items-center">
           <div className="text-2xl font-bold">
             <Link
-              href="/"
+              href={localizeHref("/")}
               className="font-family-system text-gray-900 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-100 transition-colors"
             >
               IURE.DEV
@@ -48,16 +48,31 @@ const Nav = () => {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-6">
+          <div className="hidden lg:flex items-center space-x-4">
             {menuItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 px-3 py-2 transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 px-2 py-2 transition-colors"
               >
                 {item.label}
               </Link>
             ))}
+            <div className="flex items-center space-x-1 text-sm border-l border-gray-600 pl-3 ml-1">
+              <button
+                onClick={() => setLocale("en")}
+                className={`px-1 py-1 transition-colors ${locale === "en" ? "font-bold text-gray-900 dark:text-gray-100" : "text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"}`}
+              >
+                EN
+              </button>
+              <span className="text-gray-500">·</span>
+              <button
+                onClick={() => setLocale("pt-br")}
+                className={`px-1 py-1 transition-colors ${locale === "pt-br" ? "font-bold text-gray-900 dark:text-gray-100" : "text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"}`}
+              >
+                PT
+              </button>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -131,6 +146,21 @@ const Nav = () => {
                   {item.label}
                 </Link>
               ))}
+              <div className="flex items-center space-x-2 pt-2 border-t border-gray-200 dark:border-gray-700">
+                <button
+                  onClick={() => { setLocale("en"); closeMenu(); }}
+                  className={`text-sm px-1 py-1 transition-colors ${locale === "en" ? "font-bold text-gray-900 dark:text-gray-100" : "text-gray-500"}`}
+                >
+                  EN
+                </button>
+                <span className="text-gray-500">·</span>
+                <button
+                  onClick={() => { setLocale("pt-br"); closeMenu(); }}
+                  className={`text-sm px-1 py-1 transition-colors ${locale === "pt-br" ? "font-bold text-gray-900 dark:text-gray-100" : "text-gray-500"}`}
+                >
+                  PT
+                </button>
+              </div>
             </div>
           </div>
         </div>
