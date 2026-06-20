@@ -1,9 +1,11 @@
 'use client'
 import { useGetPage } from "@/api/hooks";
 import { Error, Loading, Markdown } from "@/components";
+import { useLocale } from "@/hooks/useLocale";
 
 export default function ClientManual() {
-  const { data, isLoading, isError } = useGetPage("manual");
+  const { strapiLocale } = useLocale();
+  const { data, isLoading, isError } = useGetPage("manual", strapiLocale);
 
   const render = () => {
     if (isLoading) {

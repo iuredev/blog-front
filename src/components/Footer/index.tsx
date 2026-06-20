@@ -1,11 +1,16 @@
+"use client";
+
 import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 import Link from "next/link";
+import { useLocale } from "@/hooks/useLocale";
 
 const Footer = () => {
+  const { localizeHref } = useLocale();
+
   return (
     <footer className="dartext-gray-300 sm:py-2 md:py-4">
       <div className="max-w-7xl mx-auto flex justify-between align-middle">
-        <p className="text-sm"><Link href="/">© Iure Gomes</Link></p>
+        <p className="text-sm"><Link href={localizeHref("/")}>© Iure Gomes</Link></p>
 
         <div className="flex space-x-6">
           <a

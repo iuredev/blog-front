@@ -4,10 +4,10 @@ import { keys } from "../keys";
 import { PageType } from "../../types";
 import { defaultOptionsReactQuery } from "./utils";
 
-export const useGetPage = (page: PageType) => {
+export const useGetPage = (page: PageType, locale?: string) => {
   const { data, isLoading, isFetching, isError } = useQuery({
-    queryKey: [keys.PAGES, page],
-    queryFn: () => getPage(page),
+    queryKey: [keys.PAGES, page, locale],
+    queryFn: () => getPage(page, locale),
     ...defaultOptionsReactQuery,
   });
 

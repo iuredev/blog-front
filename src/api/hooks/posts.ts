@@ -4,10 +4,10 @@ import { keys } from "../keys";
 import { defaultOptionsReactQuery } from "./utils";
 import { Post } from "../../types";
 
-export const useGetPosts = (pageSize: number = 10, page?: number) => {
+export const useGetPosts = (pageSize: number = 10, page?: number, locale?: string) => {
   const { data, isLoading, isFetching, isError } = useQuery({
-    queryKey: [keys.POSTS],
-    queryFn: () => getPosts(pageSize, page),
+    queryKey: [keys.POSTS, locale],
+    queryFn: () => getPosts(pageSize, page, undefined, locale),
     ...defaultOptionsReactQuery,
   });
 
@@ -19,19 +19,19 @@ export const useGetPosts = (pageSize: number = 10, page?: number) => {
   };
 };
 
-export const useGetPostBySlug = (slug: string, initialData?: Post) => {
+export const useGetPostBySlug = (slug: string, initialData?: Post, locale?: string) => {
   return useQuery({
-    queryKey: [keys.POST_BY_SLUG, slug],
-    queryFn: () => getPostBySlug(slug),
+    queryKey: [keys.POST_BY_SLUG, slug, locale],
+    queryFn: () => getPostBySlug(slug, locale),
     initialData,
     ...defaultOptionsReactQuery,
   });
 };
 
-export const useGetPostsPaginated = (pageSize: number = 10, page: number, categoryId?: number) => {
+export const useGetPostsPaginated = (pageSize: number = 10, page: number, categoryId?: number, locale?: string) => {
   const { data, isLoading, isFetching, isError } = useQuery({
-    queryKey: [keys.POSTS_PAGINATED, page, categoryId],
-    queryFn: () => getPosts(pageSize, page, categoryId),
+    queryKey: [keys.POSTS_PAGINATED, page, categoryId, locale],
+    queryFn: () => getPosts(pageSize, page, categoryId, locale),
     notifyOnChangeProps: ["data"],
     placeholderData: keepPreviousData,
     ...defaultOptionsReactQuery,
@@ -47,10 +47,10 @@ export const useGetPostsPaginated = (pageSize: number = 10, page: number, catego
 };
 
 // weak logic, should be improved (should be a better way to get random posts) by using backend
-export const useGetRandomPosts = (currentPostId?: number) => {
+export const useGetRandomPosts = (currentPostId?: number, locale?: string) => {
   const { data, isLoading, isFetching, isError } = useQuery({
-    queryKey: [keys.POSTS_RELATED],
-    queryFn: () => getPosts(50),
+    queryKey: [keys.POSTS_RELATED, locale],
+    queryFn: () => getPosts(50, undefined, undefined, locale),
     ...defaultOptionsReactQuery,
   });
 

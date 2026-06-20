@@ -3,9 +3,11 @@ import Link from "next/link";
 import { useGetPage } from "@/api/hooks";
 import { Error, Loading, Markdown } from "@/components";
 import { FaArrowRight } from "react-icons/fa";
+import { useLocale } from "@/hooks/useLocale";
 
 export default function ClientAbout() {
-  const { data, isLoading, isError } = useGetPage("about");
+  const { t, strapiLocale, localizeHref } = useLocale();
+  const { data, isLoading, isError } = useGetPage("about", strapiLocale);
 
   const render = () => {
     if (isLoading) {
@@ -33,20 +35,19 @@ export default function ClientAbout() {
       {render()}
 
       <div className="flex flex-col mt-12">
-        <h4 className="uppercase font-bold">User Manual</h4>
+        <h4 className="uppercase font-bold">{t("about.userManual")}</h4>
 
         <div className="">
-          I created a playbook on how to{" "}
-          <Link href={"/manual"} className="text-blue-600">
-            <strong>work with me</strong>
+          {t("about.workWithMeText")}{" "}
+          <Link href={localizeHref("/manual")} className="text-blue-600">
+            <strong>{t("about.workWithMeLink")}</strong>
           </Link>
-          . It captures some of my strengths, weaknesses, and principles that I aim
-          to follow.
+          {t("about.workWithMeSuffix")}
         </div>
 
         <div className="flex gap-2 items-center text-blue-600 hover:text-blue-600 mt-2">
-          <Link href="/manual" className="">
-            <strong>More about me</strong>
+          <Link href={localizeHref("/manual")} className="">
+            <strong>{t("about.moreAboutMe")}</strong>
           </Link>
           <FaArrowRight />
         </div>
