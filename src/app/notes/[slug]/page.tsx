@@ -3,9 +3,21 @@ import { notFound } from 'next/navigation';
 import ClientPost from './ClientPost';
 import { getPostBySlug } from '@/api/queries/posts';
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+type PostPageProps = {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ lang?: string | string[] }>;
+};
+
+async function getStrapiLocale(searchParams: PostPageProps["searchParams"]) {
+  const params = await searchParams;
+  const lang = Array.isArray(params.lang) ? params.lang[0] : params.lang;
+
+  return lang === "pt-br" ? "pt-BR" : undefined;
+}
+
+export async function generateMetadata({ params, searchParams }: PostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const post = await getPostBySlug(slug, await getStrapiLocale(searchParams));
 
   if (!post) {
     return {
@@ -34,9 +46,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export default async function Post({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Post({ params, searchParams }: PostPageProps) {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const post = await getPostBySlug(slug, await getStrapiLocale(searchParams));
   if (!post) notFound();
   return <ClientPost slug={slug} initialData={post} />;
 }
