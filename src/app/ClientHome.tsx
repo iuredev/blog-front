@@ -18,7 +18,7 @@ export default function ClientHome() {
     : ["TypeScript", "React", "Next.js", "Node.js", "Strapi", "PostgreSQL", "Rust", "WebAssembly"];
 
   return (
-    <div className="relative left-1/2 w-[min(64rem,calc(100vw-2rem))] -translate-x-1/2">
+    <div className="relative -left-2 w-[calc(100%+1rem)] max-w-[64rem] overflow-x-clip md:left-1/2 md:w-[min(64rem,calc(100vw-2rem))] md:-translate-x-1/2">
       <section className="w-full py-6 md:py-8">
         <p className="mb-5 font-mono text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400">{t("home.role")}</p>
         <h1 className="text-3xl font-semibold leading-[1.22] tracking-tight text-gray-800 dark:text-gray-200 sm:text-[2.25rem] md:text-[2.4rem]">
