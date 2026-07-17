@@ -16,6 +16,7 @@ type SystemExports = {
   packet_progress: (index: number) => number;
   packet_status: (index: number) => number;
   packet_worker: (index: number) => number;
+  packet_response_origin: (index: number) => number;
   queue_length: () => number;
   worker_state: (index: number) => number;
   node_state: (node: number) => number;
@@ -71,7 +72,9 @@ function getPacketPoint(system: SystemExports, slot: number, layout: NodeLayout[
   if (stage === 4) return pointOnLine(worker, cache, progress);
   if (stage === 5) return pointOnLine(cache, database, progress);
   if (stage === 6) {
-    const origin = system.packet_status(slot) === 1 ? cache : database;
+    const responseOrigin = system.packet_response_origin(slot);
+    const origin = layout.find((node) => node.id === responseOrigin)
+      ?? (system.packet_status(slot) === 1 ? cache : database);
     return pointOnLine(origin, response, progress);
   }
   return client;

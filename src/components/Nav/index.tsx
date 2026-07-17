@@ -11,18 +11,14 @@ const Nav = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+    document.body.style.overflowY = isOpen ? "hidden" : "";
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflowY = "";
     };
   }, [isOpen]);
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((open) => !open);
   };
 
   const closeMenu = () => {
@@ -42,8 +38,8 @@ const Nav = () => {
   };
 
   return (
-    <nav className="py-8 relative">
-      <div className="relative left-1/2 w-[min(64rem,calc(100vw-2rem))] -translate-x-1/2">
+    <nav className="relative py-5 sm:py-7 md:py-8">
+      <div className="relative w-full min-w-0 md:left-1/2 md:w-[min(64rem,calc(100vw-2rem))] md:-translate-x-1/2">
         <div className="flex justify-between items-center">
           <div className="text-2xl font-bold">
             <Link
@@ -87,7 +83,7 @@ const Nav = () => {
           <div className="lg:hidden">
             <button
               onClick={toggleMenu}
-              className="text-gray-900 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-100 transition-colors"
+              className="grid min-h-11 min-w-11 place-items-center text-gray-900 transition-colors hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
               aria-label={t("nav.openMenu")}
               aria-expanded={isOpen}
             >
@@ -118,14 +114,14 @@ const Nav = () => {
         onClick={closeMenu}
       >
         <div
-          className={`fixed right-0 top-0 h-full w-64 bg-white dark:bg-gray-900 shadow-lg transform transition-transform duration-300 ease-in-out ${
+          className={`fixed right-0 top-0 h-dvh w-[min(18rem,calc(100vw-2rem))] overflow-y-auto bg-white dark:bg-gray-900 shadow-lg transform transition-transform duration-300 ease-in-out ${
             isOpen ? "translate-x-0" : "translate-x-full"
           }`}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="p-6">
             <button
-              className="absolute top-4 right-4 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
+              className="absolute right-3 top-3 grid min-h-11 min-w-11 place-items-center text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
               onClick={closeMenu}
               aria-label={t("nav.closeMenu")}
             >

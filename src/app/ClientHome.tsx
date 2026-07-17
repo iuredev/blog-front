@@ -18,19 +18,19 @@ export default function ClientHome() {
     : ["TypeScript", "React", "Next.js", "Node.js", "Strapi", "PostgreSQL", "Rust", "WebAssembly"];
 
   return (
-    <div className="relative -left-2 w-[calc(100%+1rem)] max-w-[64rem] overflow-x-clip md:left-1/2 md:w-[min(64rem,calc(100vw-2rem))] md:-translate-x-1/2">
-      <section className="w-full py-6 md:py-8">
+    <div className="relative w-full min-w-0 max-w-[64rem] overflow-x-clip md:left-1/2 md:w-[min(64rem,calc(100vw-2rem))] md:-translate-x-1/2">
+      <section className="w-full py-5 sm:py-6 md:py-8">
         <p className="mb-5 font-mono text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400">{t("home.role")}</p>
-        <h1 className="text-3xl font-semibold leading-[1.22] tracking-tight text-gray-800 dark:text-gray-200 sm:text-[2.25rem] md:text-[2.4rem]">
+        <h1 className="text-[1.75rem] font-semibold leading-[1.22] tracking-tight text-gray-800 dark:text-gray-200 min-[360px]:text-3xl sm:text-[2.25rem] md:text-[2.4rem]">
           <Link href={localizeHref("/about")} className="text-gray-900 hover:text-blue-500 dark:text-white dark:hover:text-blue-400">
             {t("profile.greeting")}
           </Link>
           <span className="text-gray-500 dark:text-gray-400">{t("profile.bio")}</span>
         </h1>
 
-        <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm">
+        <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm sm:mt-8">
           <Link href={localizeHref("/projects")} className="text-blue-500">{t("home.viewAllProjects")} →</Link>
-          <a href="mailto:iuresg.dev@gmail.com" className="text-gray-600 hover:text-blue-500 dark:text-gray-400">iuresg.dev@gmail.com</a>
+          <a href="mailto:iuresg.dev@gmail.com" className="break-all text-gray-600 hover:text-blue-500 dark:text-gray-400">iuresg.dev@gmail.com</a>
           <div className="flex items-center gap-4 text-gray-500">
             <a href="https://github.com/iuredev" target="_blank" rel="noreferrer" aria-label="GitHub"><FaGithub className="h-4 w-4" /></a>
             <a href="https://linkedin.com/in/iure-silva" target="_blank" rel="noreferrer" aria-label="LinkedIn"><FaLinkedin className="h-4 w-4" /></a>
@@ -43,7 +43,7 @@ export default function ClientHome() {
         <SystemInMotion />
       </section>
 
-      <div className="mt-16 max-w-[60rem] space-y-16 md:mt-20 md:space-y-20">
+      <div className="mt-12 w-full space-y-14 sm:mt-16 sm:space-y-16 md:mt-20 md:space-y-20">
         {global?.currentFocus && (
           <section className="border-t border-gray-200 pt-5 dark:border-gray-800">
             <div className="flex flex-wrap items-baseline justify-between gap-2">

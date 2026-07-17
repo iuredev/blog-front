@@ -28,6 +28,7 @@ struct Packet {
     retries: u8,
     age: u16,
     duration: u16,
+    response_origin: i8,
 }
 
 impl Packet {
@@ -39,6 +40,7 @@ impl Packet {
         retries: 0,
         age: 0,
         duration: 1,
+        response_origin: -1,
     };
 }
 
@@ -51,6 +53,7 @@ struct Simulation {
     next_arrival: u16,
     spike_ticks: u32,
     spike_intensity: u32,
+    next_worker: u8,
     total: u32,
     completed: u32,
     hits: u32,
@@ -70,6 +73,7 @@ impl Simulation {
             next_arrival: 24,
             spike_ticks: 0,
             spike_intensity: 1,
+            next_worker: 0,
             total: 0,
             completed: 0,
             hits: 0,
@@ -104,6 +108,7 @@ impl Simulation {
                 retries: 0,
                 age: 0,
                 duration,
+                response_origin: -1,
             };
             self.next_id = self.next_id.wrapping_add(1).max(1);
         } else {
@@ -118,9 +123,11 @@ impl Simulation {
     }
 
     fn available_worker(&self, except: usize) -> Option<usize> {
-        (0..WORKER_COUNT).find(|worker| {
-            self.node_failure[2 + *worker] == 0 && !self.worker_busy(*worker, except)
-        })
+        (0..WORKER_COUNT)
+            .map(|offset| (self.next_worker as usize + offset) % WORKER_COUNT)
+            .find(|worker| {
+                self.node_failure[2 + *worker] == 0 && !self.worker_busy(*worker, except)
+            })
     }
 
     fn retry_or_drop(&mut self, index: usize) {
@@ -141,6 +148,14 @@ impl Simulation {
             packet.duration = packet.duration.saturating_add(12);
             self.retries = self.retries.wrapping_add(1);
         } else {
+            packet.response_origin = match packet.stage {
+                STAGE_GATEWAY => 0,
+                STAGE_WORKER => 2 + packet.worker.max(0),
+                STAGE_CACHE => 5,
+                STAGE_DATABASE => 6,
+                STAGE_RESPONSE => 7,
+                _ => -1,
+            };
             packet.status = STATUS_DROPPED;
             packet.stage = STAGE_RESPONSE;
             packet.worker = -1;
@@ -197,6 +212,7 @@ impl Simulation {
                     self.hits = self.hits.wrapping_add(1);
                     self.packets[index].status = STATUS_CACHE_HIT;
                     self.packets[index].stage = STAGE_RESPONSE;
+                    self.packets[index].response_origin = 5;
                     self.packets[index].duration = self.duration(24, 20);
                 } else {
                     self.misses = self.misses.wrapping_add(1);
@@ -208,6 +224,7 @@ impl Simulation {
             }
             STAGE_DATABASE => {
                 self.packets[index].stage = STAGE_RESPONSE;
+                self.packets[index].response_origin = 6;
                 // Keep cache-miss status visible through the return trip.
                 self.packets[index].age = 0;
                 self.packets[index].duration = self.duration(28, 24);
@@ -233,9 +250,9 @@ impl Simulation {
             let Some(worker) = self.available_worker(index) else {
                 break;
             };
+            self.next_worker = ((worker + 1) % WORKER_COUNT) as u8;
             self.packets[index].stage = STAGE_WORKER;
             self.packets[index].worker = worker as i8;
-            self.packets[index].status = STATUS_NORMAL;
             self.packets[index].age = 0;
             self.packets[index].duration = self.duration(38, 44);
         }
@@ -346,6 +363,11 @@ pub extern "C" fn packet_worker(index: u32) -> i32 {
 }
 
 #[unsafe(no_mangle)]
+pub extern "C" fn packet_response_origin(index: u32) -> i32 {
+    packet(index).response_origin as i32
+}
+
+#[unsafe(no_mangle)]
 pub extern "C" fn packet_progress(index: u32) -> u32 {
     let packet = packet(index);
     if packet.stage == STAGE_QUEUE {
@@ -433,4 +455,58 @@ pub extern "C" fn dropped_requests() -> u32 {
 #[unsafe(no_mangle)]
 pub extern "C" fn ticks_elapsed() -> u32 {
     unsafe { (*simulation()).tick }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn queued_packet(status: u8) -> Packet {
+        Packet {
+            stage: STAGE_QUEUE,
+            status,
+            ..Packet::EMPTY
+        }
+    }
+
+    #[test]
+    fn assigns_idle_workers_in_round_robin_order() {
+        let mut simulation = Simulation::new();
+
+        for expected_worker in [0, 1, 2, 0, 1, 2] {
+            simulation.packets[0] = queued_packet(STATUS_NORMAL);
+            simulation.assign_workers();
+
+            assert_eq!(simulation.packets[0].worker, expected_worker);
+            simulation.packets[0] = Packet::EMPTY;
+        }
+    }
+
+    #[test]
+    fn preserves_retry_status_during_worker_failover() {
+        let mut simulation = Simulation::new();
+        simulation.packets[0] = queued_packet(STATUS_RETRY);
+
+        simulation.assign_workers();
+
+        assert_eq!(simulation.packets[0].stage, STAGE_WORKER);
+        assert_eq!(simulation.packets[0].status, STATUS_RETRY);
+    }
+
+    #[test]
+    fn records_the_worker_that_dropped_a_packet() {
+        let mut simulation = Simulation::new();
+        simulation.packets[0] = Packet {
+            stage: STAGE_WORKER,
+            worker: 2,
+            retries: 2,
+            ..Packet::EMPTY
+        };
+
+        simulation.retry_or_drop(0);
+
+        assert_eq!(simulation.packets[0].stage, STAGE_RESPONSE);
+        assert_eq!(simulation.packets[0].status, STATUS_DROPPED);
+        assert_eq!(simulation.packets[0].response_origin, 4);
+    }
 }

@@ -63,7 +63,7 @@ export default function RootLayout({
       <body
         className={`${InterSans.variable} ${geistMono.variable} antialiased
           bg-white dark:bg-gray-900
-          text-gray-900 dark:text-gray-300`}
+          text-gray-900 dark:text-gray-300 overflow-x-clip`}
       >
         <a href="#main-content" className="fixed left-4 top-4 z-[100] -translate-y-20 rounded bg-blue-500 px-4 py-2 text-sm text-white transition-transform focus:translate-y-0">
           Skip to content
@@ -71,17 +71,17 @@ export default function RootLayout({
         <ReactQueryProvider>
           <ThemeProvider>
             <div
-              className="grid min-h-screen grid-rows-[auto_1fr_auto] mx-auto max-w-[47.5rem] text-[1.1rem] leading-[34px] tracking-[0.9px]"
+              className="mx-auto grid min-h-screen w-full min-w-0 max-w-[47.5rem] grid-rows-[auto_1fr_auto] text-[1.1rem] leading-[34px] tracking-[0.9px]"
             >
-              <header className="px-6 md:px-0">
+              <header className="min-w-0 px-4 sm:px-6 md:px-0">
                 <Suspense>
                   <Nav />
                 </Suspense>
               </header>
-              <main id="main-content" className="container flex-grow mb-5 px-6 md:px-0 pt-14 pb-4">
+              <main id="main-content" className="container mb-5 min-w-0 flex-grow px-4 pb-4 pt-6 sm:px-6 sm:pt-10 md:px-0 md:pt-14">
                 {children}
               </main>
-              <footer className="p-6 md:p-0 md:py-2">
+              <footer className="min-w-0 p-4 sm:p-6 md:p-0 md:py-2">
                 <Suspense>
                   <Footer />
                 </Suspense>

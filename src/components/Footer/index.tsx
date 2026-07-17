@@ -9,7 +9,7 @@ const Footer = () => {
 
   return (
     <footer className="text-gray-500 sm:py-2 md:py-4">
-      <div className="relative left-1/2 flex w-[min(64rem,calc(100vw-2rem))] -translate-x-1/2 justify-between align-middle">
+      <div className="relative flex w-full min-w-0 flex-wrap items-center justify-between gap-4 md:left-1/2 md:w-[min(64rem,calc(100vw-2rem))] md:-translate-x-1/2">
         <p className="text-sm"><Link href={localizeHref("/")}>© {new Date().getFullYear()} Iure Gomes</Link></p>
 
         <div className="flex space-x-6">
