@@ -51,6 +51,7 @@ export interface Global {
   ogImage?: StrapiMedia;
   currentFocus?: string;
   currentFocusUpdatedAt?: string;
+  skills?: string[];
 }
 
 export type ProjectStatus = "active" | "completed" | "archived" | "concept";

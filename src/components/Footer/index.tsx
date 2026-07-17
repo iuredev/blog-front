@@ -8,9 +8,9 @@ const Footer = () => {
   const { localizeHref } = useLocale();
 
   return (
-    <footer className="dartext-gray-300 sm:py-2 md:py-4">
+    <footer className="text-gray-500 sm:py-2 md:py-4">
       <div className="relative left-1/2 flex w-[min(64rem,calc(100vw-2rem))] -translate-x-1/2 justify-between align-middle">
-        <p className="text-sm"><Link href={localizeHref("/")}>© Iure Gomes</Link></p>
+        <p className="text-sm"><Link href={localizeHref("/")}>© {new Date().getFullYear()} Iure Gomes</Link></p>
 
         <div className="flex space-x-6">
           <a
@@ -19,7 +19,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             aria-label="Instagram"
           >
-            <FaInstagram className="h-6 w-6 sm:h-5 sm:w-5 text-gray-300 hover:text-pink-500 transition duration-300" />
+            <FaInstagram className="h-6 w-6 sm:h-5 sm:w-5 hover:text-pink-500 transition duration-300" />
           </a>
           <a
             href="https://linkedin.com/in/iure-silva"
@@ -27,7 +27,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             aria-label="LinkedIn"
           >
-            <FaLinkedin className="h-6 w-6 sm:h-5 sm:w-5 text-gray-300 hover:text-blue-700 transition duration-300" />
+            <FaLinkedin className="h-6 w-6 sm:h-5 sm:w-5 hover:text-blue-500 transition duration-300" />
           </a>
           <a
             href="https://github.com/iuredev"
@@ -35,7 +35,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             aria-label="GitHub"
           >
-            <FaGithub className="h-6 w-6 sm:h-5 sm:w-5 text-gray-300 hover:text-gray-500 transition duration-300" />
+            <FaGithub className="h-6 w-6 sm:h-5 sm:w-5 hover:text-gray-900 dark:hover:text-gray-200 transition duration-300" />
           </a>
         </div>
       </div>

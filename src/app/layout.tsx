@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 const title = "Iure | Software Engineer";
-const description = "Personal blog and portfolio of Iure, a software engineer sharing insights on web development, programming and technology.";
+const description = "Iure is a software engineer who designs systems, writes code and cares about the experience behind every detail.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const global = await getGlobal();
@@ -65,6 +65,9 @@ export default function RootLayout({
           bg-white dark:bg-gray-900
           text-gray-900 dark:text-gray-300`}
       >
+        <a href="#main-content" className="fixed left-4 top-4 z-[100] -translate-y-20 rounded bg-blue-500 px-4 py-2 text-sm text-white transition-transform focus:translate-y-0">
+          Skip to content
+        </a>
         <ReactQueryProvider>
           <ThemeProvider>
             <div
@@ -75,7 +78,7 @@ export default function RootLayout({
                   <Nav />
                 </Suspense>
               </header>
-              <main className="container flex-grow mb-5 px-6 md:px-0 pt-14 pb-4">
+              <main id="main-content" className="container flex-grow mb-5 px-6 md:px-0 pt-14 pb-4">
                 {children}
               </main>
               <footer className="p-6 md:p-0 md:py-2">
@@ -87,19 +90,24 @@ export default function RootLayout({
           </ThemeProvider>
         </ReactQueryProvider>
 
-        {/* Google Analytics */}
-        <Script
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
+        <Script id="person-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Iure Gomes",
+          url: "https://iure.dev",
+          email: "mailto:iuresg.dev@gmail.com",
+          jobTitle: "Software Engineer",
+          sameAs: ["https://github.com/iuredev", "https://linkedin.com/in/iure-silva", "https://instagram.com/iure.dev"],
+        }) }} />
+        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && <>
+          <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`} />
+          <Script id="google-analytics" strategy="afterInteractive">{`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');
-          `}
-        </Script>
+          `}</Script>
+        </>}
       </body>
     </html>
   );

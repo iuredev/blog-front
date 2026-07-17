@@ -1,12 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useLocale } from "@/hooks/useLocale";
 // import { ThemeToggle } from "@/components";
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { locale, t, setLocale, localizeHref } = useLocale();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (isOpen) {
@@ -29,10 +31,15 @@ const Nav = () => {
 
   const menuItems = [
     { href: localizeHref("/"), label: t("nav.home") },
-    { href: localizeHref("/about"), label: t("nav.about") },
     { href: localizeHref("/projects"), label: t("nav.projects") },
+    { href: localizeHref("/about"), label: t("nav.about") },
     { href: localizeHref("/notes"), label: t("nav.notes") },
   ];
+
+  const isCurrent = (href: string) => {
+    const path = href.split("?")[0];
+    return path === "/" ? pathname === "/" : pathname.startsWith(path);
+  };
 
   return (
     <nav className="py-8 relative">
@@ -53,7 +60,8 @@ const Nav = () => {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 px-2 py-2 transition-colors"
+                aria-current={isCurrent(item.href) ? "page" : undefined}
+                className={`px-2 py-2 transition-colors ${isCurrent(item.href) ? "text-blue-500" : "text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"}`}
               >
                 {item.label}
               </Link>
@@ -80,7 +88,8 @@ const Nav = () => {
             <button
               onClick={toggleMenu}
               className="text-gray-900 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-100 transition-colors"
-              aria-label="Toggle menu"
+              aria-label={t("nav.openMenu")}
+              aria-expanded={isOpen}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +127,7 @@ const Nav = () => {
             <button
               className="absolute top-4 right-4 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
               onClick={closeMenu}
-              aria-label="Close menu"
+              aria-label={t("nav.closeMenu")}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +149,8 @@ const Nav = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="block text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 py-2 transition-colors"
+                  aria-current={isCurrent(item.href) ? "page" : undefined}
+                  className={`block py-2 transition-colors ${isCurrent(item.href) ? "text-blue-500" : "text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"}`}
                   onClick={closeMenu}
                 >
                   {item.label}

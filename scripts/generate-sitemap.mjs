@@ -14,16 +14,14 @@ const __dirname = dirname(__filename);
 
 async function generateSitemap() {
   try {
-    const response = await axios.get(
-      `${NEXT_PUBLIC_API_URL}/articles?pagination[pageSize]=100&populate=*`,
-      {
-        headers: {
-          Authorization: `Bearer ${NEXT_PUBLIC_API_KEY}`,
-        },
-      }
-    );
+    const config = { headers: { Authorization: `Bearer ${NEXT_PUBLIC_API_KEY}` } };
+    const [articlesResponse, projectsResponse] = await Promise.all([
+      axios.get(`${NEXT_PUBLIC_API_URL}/articles?pagination[pageSize]=100&fields[0]=slug&fields[1]=updatedAt`, config),
+      axios.get(`${NEXT_PUBLIC_API_URL}/projects?pagination[pageSize]=100&fields[0]=slug&fields[1]=updatedAt`, config),
+    ]);
 
-    const posts = response.data.data;
+    const posts = articlesResponse.data.data;
+    const projects = projectsResponse.data.data;
     const siteUrl = 'https://iure.dev';
 
     const urls = [
@@ -33,9 +31,14 @@ async function generateSitemap() {
         priority: 1.0,
       },
       {
-        loc: `${siteUrl}/blog`,
-        changefreq: 'daily',
+        loc: `${siteUrl}/projects`,
+        changefreq: 'weekly',
         priority: 0.9,
+      },
+      {
+        loc: `${siteUrl}/notes`,
+        changefreq: 'weekly',
+        priority: 0.7,
       },
       {
         loc: `${siteUrl}/about`,
@@ -50,10 +53,18 @@ async function generateSitemap() {
     ];
     posts.forEach((post) => {
       urls.push({
-        loc: `${siteUrl}/blog/${post.slug}`,
+        loc: `${siteUrl}/notes/${post.slug}`,
         changefreq: 'weekly',
         priority: 0.8,
         lastmod: post.updatedAt,
+      });
+    });
+    projects.filter((project) => project.slug).forEach((project) => {
+      urls.push({
+        loc: `${siteUrl}/projects/${project.slug}`,
+        changefreq: 'monthly',
+        priority: 0.8,
+        lastmod: project.updatedAt,
       });
     });
 
