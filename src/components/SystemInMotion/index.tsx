@@ -3,7 +3,7 @@
 import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
 import { useLocale } from "@/hooks/useLocale";
-import styles from "./GarbageCollector.module.css";
+import styles from "./SystemInMotion.module.css";
 
 type SystemExports = {
   new_scene: () => void;

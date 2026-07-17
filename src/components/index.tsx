@@ -9,4 +9,4 @@ export { default as Error } from "./Error";
 export { default as ThemeToggle } from "./ThemeToggle";
 export { default as ProjectCard } from "./ProjectCard";
 export { default as Reactions } from "./Reactions";
-export { default as SystemInMotion } from "./GarbageCollector";
+export { default as SystemInMotion } from "./SystemInMotion";
