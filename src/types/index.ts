@@ -49,15 +49,30 @@ export interface ReactionCounts {
 export interface Global {
   photo?: StrapiMedia;
   ogImage?: StrapiMedia;
+  currentFocus?: string;
+  currentFocusUpdatedAt?: string;
 }
+
+export type ProjectStatus = "active" | "completed" | "archived" | "concept";
 
 export interface Project {
     id: number;
     documentId: string;
     title: string;
     description: string;
-    link: string;
+    link?: string;
+    slug?: string;
+    repository?: string;
+    role?: string;
+    year?: number;
+    technologies?: string[];
+    status?: ProjectStatus;
+    content?: string;
+    featured?: boolean;
+    featuredOrder?: number;
     cover?: StrapiMedia;
+    createdAt?: string;
+    updatedAt?: string;
     publishedAt: string;
 }
 

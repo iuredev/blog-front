@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Project } from "@/types";
 
 interface ProjectCardProps {
@@ -10,10 +11,10 @@ const STRAPI_BASE_URL =
 
 export default function ProjectCard({ project }: ProjectCardProps) {
     return (
-        <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
+        <Link
+            href={project.slug ? `/projects/${project.slug}` : project.link ?? "/projects"}
+            target={!project.slug && project.link ? "_blank" : undefined}
+            rel={!project.slug && project.link ? "noopener noreferrer" : undefined}
             className="block group"
         >
             {project.cover && (
@@ -31,6 +32,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 {project.title}
             </div>
             <p className="text-gray-400 text-sm mt-1">{project.description}</p>
-        </a>
+            {(project.role || project.year || project.technologies?.length) && (
+                <p className="mt-2 font-mono text-xs text-gray-500">
+                    {[project.role, project.year, project.technologies?.slice(0, 3).join(", ")].filter(Boolean).join(" · ")}
+                </p>
+            )}
+        </Link>
     );
 }

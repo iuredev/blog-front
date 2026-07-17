@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { getProjects } from "../queries";
+import { getProjectBySlug, getProjects } from "../queries";
+import { Project } from "../../types";
 import { keys } from "../keys";
 import { defaultOptionsReactQuery } from "./utils";
 
@@ -15,4 +16,13 @@ export const useGetProjects = () => {
     isLoading,
     isError,
   };
+};
+
+export const useGetProjectBySlug = (slug: string, initialData?: Project) => {
+  return useQuery({
+    queryKey: [keys.PROJECT_BY_SLUG, slug],
+    queryFn: () => getProjectBySlug(slug),
+    initialData,
+    ...defaultOptionsReactQuery,
+  });
 };

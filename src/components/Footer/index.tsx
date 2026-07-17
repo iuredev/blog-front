@@ -9,7 +9,7 @@ const Footer = () => {
 
   return (
     <footer className="dartext-gray-300 sm:py-2 md:py-4">
-      <div className="max-w-7xl mx-auto flex justify-between align-middle">
+      <div className="relative left-1/2 flex w-[min(64rem,calc(100vw-2rem))] -translate-x-1/2 justify-between align-middle">
         <p className="text-sm"><Link href={localizeHref("/")}>© Iure Gomes</Link></p>
 
         <div className="flex space-x-6">

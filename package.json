@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack -p $PORT",
     "build": "node --experimental-modules scripts/generate-sitemap.mjs && rm -rf .next && tsc -b && next build",
+    "game:build": "cargo build --manifest-path game/Cargo.toml --target wasm32-unknown-unknown --release && node scripts/copy-game-wasm.mjs",
     "start": "next start -p $PORT",
     "lint": "next lint"
   },
