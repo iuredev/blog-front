@@ -99,7 +99,7 @@ export default function ClientHome() {
             <p className="border-t border-gray-200 py-5 text-sm tracking-normal text-gray-500 dark:border-gray-800 dark:text-gray-400">{t("home.noPostsFound")}</p>
           ) : (
             <div className="border-t border-gray-200 pt-2 dark:border-gray-800">
-              {posts.map((post: Post) => <PostLink key={post.id} post={post} preview={false} />)}
+              {posts.map((post: Post) => <PostLink key={post.id} post={post} preview={false} compact />)}
             </div>
           )}
         </section>

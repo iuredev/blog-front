@@ -9,13 +9,14 @@ import { useLocale } from "@/hooks/useLocale";
 interface PostProps {
   post: Post;
   preview: boolean;
+  compact?: boolean;
 }
-export default function PostLink({ post, preview }: PostProps) {
+export default function PostLink({ post, preview, compact = false }: PostProps) {
   const { localizeHref } = useLocale();
 
   return (
     <div key={post.id} className="my-4 gap-16 width-full">
-      <div className="text-xl font-semibold block">
+      <div className={`block font-semibold ${compact ? "text-base" : "text-xl"}`}>
         <Link href={localizeHref(`/notes/${post.slug}`)}>{post.title}</Link>
       </div>
       <span className="text-gray-300 text-base">
