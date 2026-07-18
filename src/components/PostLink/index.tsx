@@ -16,7 +16,7 @@ export default function PostLink({ post, preview, compact = false }: PostProps) 
 
   return (
     <div key={post.id} className={`w-full ${compact ? "my-3" : "my-4"}`}>
-      <div className={`block font-semibold ${compact ? "text-[0.9375rem] leading-6" : "text-xl"}`}>
+      <div className={`block font-semibold ${compact ? "text-[0.96875rem] leading-6" : "text-xl"}`}>
         <Link href={localizeHref(`/notes/${post.slug}`)}>{post.title}</Link>
       </div>
       <span className={`text-gray-400 ${compact ? "text-xs leading-5" : "text-base"}`}>
