@@ -18,7 +18,7 @@ export default function ClientHome() {
     : ["TypeScript", "React", "Next.js", "Node.js", "Strapi", "PostgreSQL", "Rust", "WebAssembly"];
 
   return (
-    <div className="relative w-full min-w-0 max-w-[64rem] overflow-x-clip md:left-1/2 md:w-[min(64rem,calc(100vw-2rem))] md:-translate-x-1/2">
+    <div className="w-full min-w-0 overflow-x-clip">
       <section className="w-full py-5 sm:py-6 md:py-8">
         <p className="mb-5 font-mono text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400">{t("home.role")}</p>
         <h1 className="text-[1.75rem] font-semibold leading-[1.22] tracking-tight text-gray-800 dark:text-gray-200 min-[360px]:text-3xl sm:text-[2.25rem] md:text-[2.4rem]">
@@ -47,7 +47,7 @@ export default function ClientHome() {
         {global?.currentFocus && (
           <section className="border-t border-gray-200 pt-5 dark:border-gray-800">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h2 className="text-base font-semibold">{t("home.now")}</h2>
+              <h2 className="text-lg font-semibold tracking-tight">{t("home.now")}</h2>
               {global.currentFocusUpdatedAt && (
                 <span className="text-xs tracking-normal text-gray-400">
                   {t("home.nowUpdated")} {new Intl.DateTimeFormat(locale === "pt-br" ? "pt-BR" : "en", { month: "short", year: "numeric" }).format(new Date(global.currentFocusUpdatedAt))}
@@ -60,7 +60,7 @@ export default function ClientHome() {
 
         <section aria-labelledby="projects-title">
           <div className="mb-3 flex items-baseline justify-between gap-6">
-            <h2 id="projects-title" className="text-base font-semibold">{t("home.projects")}</h2>
+            <h2 id="projects-title" className="text-lg font-semibold tracking-tight">{t("home.projects")}</h2>
             <Link href={localizeHref("/projects")} className="text-xs text-blue-500">{t("home.viewAllProjects")} →</Link>
           </div>
 
@@ -89,7 +89,7 @@ export default function ClientHome() {
         <section aria-labelledby="notes-title">
           <div className="mb-3 flex items-baseline justify-between gap-6">
             <div>
-              <h2 id="notes-title" className="text-base font-semibold">{t("home.recentNotes")}</h2>
+              <h2 id="notes-title" className="text-lg font-semibold tracking-tight">{t("home.recentNotes")}</h2>
               <p className="mt-1 text-xs tracking-normal text-gray-500 dark:text-gray-400">{t("notes.description")}</p>
             </div>
             <Link href={localizeHref("/notes")} className="text-xs text-blue-500">{t("home.viewAllNotes")} →</Link>
@@ -105,15 +105,25 @@ export default function ClientHome() {
         </section>
 
         <section className="border-t border-gray-200 pt-5 dark:border-gray-800">
-          <h2 className="text-base font-semibold">{t("nav.about")}</h2>
+          <h2 className="text-lg font-semibold tracking-tight">{t("nav.about")}</h2>
           <p className="mt-3 text-sm leading-6 tracking-normal text-gray-500 dark:text-gray-400">
             {t("about.workWithMeText")} <Link href={localizeHref("/manual")} className="text-blue-500">{t("about.workWithMeLink")}</Link>{t("about.workWithMeSuffix")} <Link href={localizeHref("/about")} className="text-blue-500">{t("about.moreAboutMe")} →</Link>
           </p>
         </section>
 
         <section className="border-t border-gray-200 pb-8 pt-5 dark:border-gray-800" aria-labelledby="skills-title">
-          <h2 id="skills-title" className="text-base font-semibold">{t("home.skills")}</h2>
-          <p className="mt-3 text-sm leading-6 tracking-normal text-gray-500 dark:text-gray-400">{skills.join(" · ")}</p>
+          <h2 id="skills-title" className="text-lg font-semibold tracking-tight">{t("home.skills")}</h2>
+          <ul className="mt-4 flex flex-wrap gap-2" role="list">
+            {skills.map((skill, index) => (
+              <li
+                key={`${skill}-${index}`}
+                className="flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5 font-mono text-[11px] leading-5 tracking-normal text-gray-600 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400"
+              >
+                <span className="h-1 w-1 rounded-full bg-blue-500" aria-hidden="true" />
+                {skill}
+              </li>
+            ))}
+          </ul>
         </section>
       </div>
     </div>

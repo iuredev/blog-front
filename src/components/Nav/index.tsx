@@ -39,7 +39,7 @@ const Nav = () => {
 
   return (
     <nav className="relative py-5 sm:py-7 md:py-8">
-      <div className="relative w-full min-w-0 md:left-1/2 md:w-[min(64rem,calc(100vw-2rem))] md:-translate-x-1/2">
+      <div className="w-full min-w-0">
         <div className="flex justify-between items-center">
           <div className="text-2xl font-bold">
             <Link

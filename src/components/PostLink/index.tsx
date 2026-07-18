@@ -15,11 +15,11 @@ export default function PostLink({ post, preview, compact = false }: PostProps) 
   const { localizeHref } = useLocale();
 
   return (
-    <div key={post.id} className="my-4 gap-16 width-full">
-      <div className={`block font-semibold ${compact ? "text-base" : "text-xl"}`}>
+    <div key={post.id} className={`w-full ${compact ? "my-3" : "my-4"}`}>
+      <div className={`block font-semibold ${compact ? "text-[0.9375rem] leading-6" : "text-xl"}`}>
         <Link href={localizeHref(`/notes/${post.slug}`)}>{post.title}</Link>
       </div>
-      <span className="text-gray-300 text-base">
+      <span className={`text-gray-400 ${compact ? "text-xs leading-5" : "text-base"}`}>
         {formatDate(post.createdAt)} •{" "}
         {post.categories?.length > 0 && (
           <>

@@ -71,17 +71,17 @@ export default function RootLayout({
         <ReactQueryProvider>
           <ThemeProvider>
             <div
-              className="mx-auto grid min-h-screen w-full min-w-0 max-w-[47.5rem] grid-rows-[auto_1fr_auto] text-[1.1rem] leading-[34px] tracking-[0.9px]"
+              className="mx-auto grid min-h-screen w-full min-w-0 max-w-[64rem] grid-rows-[auto_1fr_auto] text-[1.1rem] leading-[34px] tracking-[0.9px]"
             >
-              <header className="min-w-0 px-4 sm:px-6 md:px-0">
+              <header className="min-w-0 px-4 sm:px-6 lg:px-0">
                 <Suspense>
                   <Nav />
                 </Suspense>
               </header>
-              <main id="main-content" className="container mb-5 min-w-0 flex-grow px-4 pb-4 pt-6 sm:px-6 sm:pt-10 md:px-0 md:pt-14">
+              <main id="main-content" className="mb-5 w-full min-w-0 flex-grow px-4 pb-4 pt-6 sm:px-6 sm:pt-10 md:pt-14 lg:px-0">
                 {children}
               </main>
-              <footer className="min-w-0 p-4 sm:p-6 md:p-0 md:py-2">
+              <footer className="min-w-0 p-4 sm:p-6 md:py-2 lg:px-0">
                 <Suspense>
                   <Footer />
                 </Suspense>
