@@ -86,9 +86,9 @@ export default function ClientHome() {
           )}
         </section>
 
-        <section className="border-t border-gray-200 pt-5 dark:border-gray-800" aria-labelledby="skills-title">
+        <section aria-labelledby="skills-title">
           <h2 id="skills-title" className="text-xl font-semibold tracking-tight">{t("home.skills")}</h2>
-          <ul className="mt-4 flex flex-wrap gap-2" role="list">
+          <ul className="mt-3 flex flex-wrap gap-2 border-t border-gray-200 pt-4 dark:border-gray-800" role="list">
             {skills.map((skill, index) => (
               <li
                 key={`${skill}-${index}`}
