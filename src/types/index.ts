@@ -54,23 +54,14 @@ export interface Global {
   skills?: string[];
 }
 
-export type ProjectStatus = "active" | "completed" | "archived" | "concept";
-
 export interface Project {
     id: number;
     documentId: string;
     title: string;
     description: string;
-    link?: string;
-    slug?: string;
-    repository?: string;
-    role?: string;
-    year?: number;
+    link: string;
+    github?: string;
     technologies?: string[];
-    status?: ProjectStatus;
-    content?: string;
-    featured?: boolean;
-    featuredOrder?: number;
     cover?: StrapiMedia;
     createdAt?: string;
     updatedAt?: string;

@@ -7,7 +7,6 @@ interface Keys {
   POSTS_PAGINATED: string;
   PAGES: string;
   PROJECTS: string;
-  PROJECT_BY_SLUG: string;
   GLOBAL: string;
   REACTIONS: string;
 }
@@ -21,7 +20,6 @@ export const keys: Record<keyof Keys, string> = {
   POSTS_RELATED: "articles_related",
   PAGES: "pages",
   PROJECTS: "projects",
-  PROJECT_BY_SLUG: "project_by_slug",
   GLOBAL: "global",
   REACTIONS: "reactions",
 };

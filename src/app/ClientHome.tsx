@@ -69,18 +69,23 @@ export default function ClientHome() {
           ) : (
             <div className="grid gap-3 border-t border-gray-200 pt-4 dark:border-gray-800 sm:grid-cols-2 lg:grid-cols-3">
               {projects.slice(0, 5).map((project: Project) => (
-                <Link key={project.id} href={project.slug ? localizeHref(`/projects/${project.slug}`) : project.link ?? localizeHref("/projects")} target={!project.slug && project.link ? "_blank" : undefined} rel={!project.slug && project.link ? "noopener noreferrer" : undefined} className="group flex min-h-36 flex-col rounded-lg border border-gray-200 p-4 transition-colors hover:border-blue-300 dark:border-gray-800 dark:hover:border-blue-800">
-                  <div className="flex items-start justify-between gap-4">
+                <article key={project.id} className="flex min-h-36 flex-col rounded-lg border border-gray-200 p-4 transition-colors hover:border-blue-300 dark:border-gray-800 dark:hover:border-blue-800">
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="group flex items-start justify-between gap-4">
                     <h3 className="text-sm font-semibold leading-5 tracking-normal group-hover:text-blue-500">{project.title}</h3>
-                    <span className="shrink-0 text-sm leading-5 text-gray-400 group-hover:text-blue-500">{project.slug || !project.link ? "→" : "↗"}</span>
-                  </div>
+                    <span className="shrink-0 text-sm leading-5 text-gray-400 group-hover:text-blue-500">↗</span>
+                  </a>
                   <p className="mt-2 line-clamp-2 text-xs leading-5 tracking-normal text-gray-500 dark:text-gray-400">{project.description}</p>
-                  {(project.role || project.year || project.technologies?.length) && (
-                    <p className="mt-auto pt-3 font-mono text-[10px] leading-4 tracking-normal text-gray-400">
-                      {[project.role, project.year, project.technologies?.slice(0, 3).join(", ")].filter(Boolean).join(" · ")}
-                    </p>
-                  )}
-                </Link>
+                  <div className="mt-auto flex items-end justify-between gap-3 pt-3">
+                    {project.technologies?.length ? (
+                      <p className="font-mono text-[10px] leading-4 tracking-normal text-gray-400">
+                        {project.technologies.slice(0, 3).join(" · ")}
+                      </p>
+                    ) : <span />}
+                    {project.github && (
+                      <a href={project.github} target="_blank" rel="noopener noreferrer" className="shrink-0 text-[10px] leading-4 text-blue-500">GitHub ↗</a>
+                    )}
+                  </div>
+                </article>
               ))}
             </div>
           )}
