@@ -11,8 +11,8 @@ import { Project } from "@/types";
 type Props = { slug: string; initialData: Project };
 
 export default function ClientProject({ slug, initialData }: Props) {
-  const { data, isLoading, isError } = useGetProjectBySlug(slug, initialData);
-  const { t, localizeHref } = useLocale();
+  const { t, localizeHref, strapiLocale } = useLocale();
+  const { data, isLoading, isError } = useGetProjectBySlug(slug, initialData, strapiLocale);
 
   if (isLoading) return <Loading />;
   if (isError || !data) return <Error />;

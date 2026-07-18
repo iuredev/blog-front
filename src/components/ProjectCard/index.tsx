@@ -1,17 +1,21 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Project } from "@/types";
 import { getStrapiMediaUrl } from "@/api/queries/global";
+import { useLocale } from "@/hooks/useLocale";
 
 interface ProjectCardProps {
     project: Project;
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+    const { localizeHref } = useLocale();
     const coverUrl = getStrapiMediaUrl(project.cover?.url);
     return (
         <Link
-            href={project.slug ? `/projects/${project.slug}` : project.link ?? "/projects"}
+            href={project.slug ? localizeHref(`/projects/${project.slug}`) : project.link ?? localizeHref("/projects")}
             target={!project.slug && project.link ? "_blank" : undefined}
             rel={!project.slug && project.link ? "noopener noreferrer" : undefined}
             className="block group"

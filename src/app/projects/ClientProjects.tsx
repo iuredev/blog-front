@@ -6,8 +6,8 @@ import { Project } from "@/types";
 import { useLocale } from "@/hooks/useLocale";
 
 export default function ClientProjects() {
-  const { projects, isLoading, isError } = useGetProjects();
-  const { t } = useLocale();
+  const { t, strapiLocale } = useLocale();
+  const { projects, isLoading, isError } = useGetProjects(strapiLocale);
 
   const render = () => {
     if (isLoading) return <Loading />;

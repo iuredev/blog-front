@@ -11,7 +11,7 @@ import { Post, Project } from "@/types";
 export default function ClientHome() {
   const { t, locale, strapiLocale, localizeHref } = useLocale();
   const { posts, isLoading: postsLoading } = useGetPosts(3, undefined, strapiLocale);
-  const { projects, isLoading: projectsLoading } = useGetProjects();
+  const { projects, isLoading: projectsLoading } = useGetProjects(strapiLocale);
   const { data: global } = useGetGlobal();
   const skills = global?.skills?.length
     ? global.skills
