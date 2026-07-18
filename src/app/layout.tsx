@@ -30,6 +30,14 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     metadataBase: new URL("https://iure.dev"),
+    manifest: "/manifest.json",
+    icons: {
+      icon: [
+        { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+        { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      ],
+      apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    },
     alternates: { canonical: "/" },
     robots: { index: true, follow: true },
     openGraph: {
